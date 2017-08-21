@@ -19,7 +19,8 @@ var Main = function($,api,_){
         //     format: 'mm/dd/yyyy',
         //     startDate: '-3d'
         //     });
-        populateVisitType();
+        api.testPost();
+        //populateVisitType();
     };
 
     return main;
