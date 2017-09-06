@@ -1,0 +1,32 @@
+{
+  "name": "reimaged-treeskin",
+  "version": "1.0.0",
+  "description": "Treeskin",
+  "main": "main.html",
+  "dependencies": {
+    "bootstrap": "^4.0.0-alpha.6",
+    "gulp": "^3.9.1",
+    "jquery": "^3.2.1",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-deporder": "^1.1.0",
+    "gulp-strip-debug": "^1.1.0",
+    "gulp-uglify": "^3.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KRKroening/reimaged-treeskin.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KRKroening/reimaged-treeskin/issues"
+  },
+  "homepage": "https://github.com/KRKroening/reimaged-treeskin#readme"
+}
