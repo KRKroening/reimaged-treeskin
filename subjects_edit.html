@@ -5,14 +5,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="node_modules/jquery/dist/jquery.js"></script>
   <script src="node_modules/underscore/underscore.js"></script>
-
-  <script src="src/api.js"></script>
-  <script src="src/main.js"></script>
 
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
@@ -75,7 +72,7 @@
       <ul class="nav navbar-nav">
         <li class="active"><a href="#">Home</a></li>
         <li><a href="#">About</a></li>
-        <li><a href="subjects_list.html">Subjects</a></li>
+        <li><a href="#">Subjects</a></li>
         <li><a href="#">Providers</a></li>
       </ul>
     </div>
@@ -84,28 +81,22 @@
   
 <div class="container-fluid text-center">    
   <div class="row content">
-    <div id="subjectList" class="col-sm-2 sidenav">
-      <ul id="subjectContainer">
-
+    <div  class="col-sm-2 sidenav">
+      <ul id="typesContainer">
+        <!--  -->
       </ul>
     </div>
     <div class="col-sm-8 text-left"> 
-      <h1>Welcome</h1>
-      <div id="datePicker"></div>
-      <hr>
-      <h3>Test</h3>
-      <div id="mainContentContainer">
-        <select id="subTypesDD" class="entryDropDown">
-          <option selected value="0">Select...</option>
-        </select>
-        <div id="datetimepickr"></div>
-        <input id="entryInput" class="textBoxEntry"/>
-      </div>
-    </div>
-    <div  class="col-sm-2 sidenav">
-      <ul id="typesContainer">
+        <h2> Create or Edit a Subject</h2>
+      <div class="formContainer"><label>Name: </label> <input type="text"/></div>
+      <div class="formContainer"><label>Age: </label> <input type="text"/></div>
+      <div class="formContainer"><label>Gender: </label> <input type="text"/></div>
+      <div class="formContainer"><label>Breed: </label> <input type="text"/></div>
+      <div class="formContainer"><label>Colour: </label> <input type="text"/></div>
 
-      </ul>
+    </div>
+    <div id="categoryList" class="col-sm-2 sidenav">
+      <!---->
     </div>
   </div>
 </div>
@@ -118,7 +109,7 @@
 </body>
 
   <script src="src/api.js"></script>
-  <script src="src/main.js"></script>
+  <script src="src/subject_edit.js"></script>
 </html>
 
 

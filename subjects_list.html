@@ -11,8 +11,7 @@
   <script src="node_modules/jquery/dist/jquery.js"></script>
   <script src="node_modules/underscore/underscore.js"></script>
 
-  <script src="src/api.js"></script>
-  <script src="src/main.js"></script>
+
 
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
@@ -84,28 +83,31 @@
   
 <div class="container-fluid text-center">    
   <div class="row content">
-    <div id="subjectList" class="col-sm-2 sidenav">
-      <ul id="subjectContainer">
-
-      </ul>
+    <div  class="col-sm-2 sidenav">
     </div>
     <div class="col-sm-8 text-left"> 
-      <h1>Welcome</h1>
-      <div id="datePicker"></div>
+      <h1>Subject List</h1>
       <hr>
-      <h3>Test</h3>
-      <div id="mainContentContainer">
-        <select id="subTypesDD" class="entryDropDown">
-          <option selected value="0">Select...</option>
-        </select>
-        <div id="datetimepickr"></div>
-        <input id="entryInput" class="textBoxEntry"/>
+      <p>View, edit, or create new Subject</p>
+      <button onclick="window.location.href='subjects_edit.html?mode=new';">Add Subject</button>
+      <div >
+          <table class="table table-striped" id="subjectTable">
+            <thead>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Gender</th>
+                <th>Breed</th>
+                <th>Colour</th>
+                <th>Action</th>
+            </thead>
+            <tbody id="subjectTableBody">
+            </tbody>
+          </table>
+
       </div>
     </div>
-    <div  class="col-sm-2 sidenav">
-      <ul id="typesContainer">
-
-      </ul>
+    <div id="categoryList" class="col-sm-2 sidenav">
+      <!---->
     </div>
   </div>
 </div>
@@ -119,6 +121,7 @@
 
   <script src="src/api.js"></script>
   <script src="src/main.js"></script>
+  <script src="src/subject_list.js"></script>
 </html>
 
 
