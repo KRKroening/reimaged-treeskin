@@ -25,7 +25,6 @@
 
 #typesContainer {
     list-style: none;
-    background-color: #333030;
     padding-left: 0;
 
 }
@@ -36,7 +35,7 @@
 
 .textBoxEntry {
     height: 200px;
-    width: 600px;
+    width: 870px;
     margin-bottom: 50px;
 }
 
@@ -48,9 +47,29 @@
 }
 
 .formContainer {
-    width:  15px;
+    margin:  15px;
 }
 
 .formContainer label{
     width: 50px;
+    margin-right: 5px;
+}
+
+.buttonContainer {
+    margin: 0 auto;
+    width: 122px;
+
+}
+
+#optionsContainer {
+    width: 124px;
+    margin: 0 auto;
+}
+
+#optionsContainer h3{
+    text-align: center;
+}
+
+.selectedButton {
+    background-color : #0a0808;
 }

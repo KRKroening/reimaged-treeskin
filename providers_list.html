@@ -11,8 +11,7 @@
   <script src="node_modules/jquery/dist/jquery.js"></script>
   <script src="node_modules/underscore/underscore.js"></script>
 
-  <script src="src/api.js"></script>
-  <script src="src/main.js"></script>
+
 
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
@@ -73,10 +72,10 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Subjects</a></li>
-        <li><a href="#">Providers</a></li>
+        <li><a href="main.html">Home</a></li>
+        <li><a href="subjects_list.html">Subjects</a></li>
+        <li class="active"><a href="providers_list.html">Providers</a></li>
+        
       </ul>
     </div>
   </div>
@@ -85,16 +84,27 @@
 <div class="container-fluid text-center">    
   <div class="row content">
     <div  class="col-sm-2 sidenav">
-      <ul id="typesContainer">
-
-      </ul>
     </div>
     <div class="col-sm-8 text-left"> 
-      <h1>Welcome</h1>
-      <div id="datePicker"></div>
+      <h1>Provider List</h1>
       <hr>
-      <h3>Test</h3>
-      <p>Lorem ipsum...</p>
+      <p>View, edit, or create new Provider</p>
+      <button onclick="window.location.href='providers_edit.html?mode=new';">Add Provider</button>
+      <div >
+          <table class="table table-striped" id="providerTable">
+            <thead>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Primary Phone</th>
+                <th>Secondary Phone</th>
+                <th>Clinic/Company</th>
+                <th>Action</th>
+            </thead>
+            <tbody id="providerTableBody">
+            </tbody>
+          </table>
+
+      </div>
     </div>
     <div id="categoryList" class="col-sm-2 sidenav">
       <!---->
@@ -108,6 +118,10 @@
 
 
 </body>
+
+  <script src="src/api.js"></script>
+  <script src="src/main.js"></script>
+  <script src="src/provider_list.js"></script>
 </html>
 
 

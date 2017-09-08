@@ -5,6 +5,7 @@
   "main": "main.html",
   "dependencies": {
     "bootstrap": "^4.0.0-alpha.6",
+    "flatpickr": "^3.0.7",
     "gulp": "^3.9.1",
     "jquery": "^3.2.1",
     "underscore": "^1.8.3"

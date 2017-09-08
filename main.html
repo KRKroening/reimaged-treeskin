@@ -5,25 +5,19 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css">
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="node_modules/jquery/dist/jquery.js"></script>
   <script src="node_modules/underscore/underscore.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="node_modules/flatpickr/dist/flatpickr.js"></script>
+  <link rel="stylesheet" href="node_modules/flatpickr/dist/flatpickr.css">
+  
 
   <script src="src/api.js"></script>
   <script src="src/main.js"></script>
-
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-
-  <script src = "node_modules\jquery\external\sizzle\dist\sizzle.js"></script>
-  <script src = "node_modules/js/bootstrap-datepicker.js"></script>
-
-  <!-- <script type="text/javascript">
-    $(document).ready(function(){
-            Main.load();
-    });
-  </script> -->
 
   <style>
     /* Remove the navbar's default margin-bottom and rounded borders */ 
@@ -73,10 +67,9 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
+        <li class="active"><a href="main.html">Home</a></li>
         <li><a href="subjects_list.html">Subjects</a></li>
-        <li><a href="#">Providers</a></li>
+        <li><a href="providers_list.html">Providers</a></li>
       </ul>
     </div>
   </div>
@@ -91,15 +84,27 @@
     </div>
     <div class="col-sm-8 text-left"> 
       <h1>Welcome</h1>
-      <div id="datePicker"></div>
       <hr>
-      <h3>Test</h3>
+      
       <div id="mainContentContainer">
-        <select id="subTypesDD" class="entryDropDown">
-          <option selected value="0">Select...</option>
-        </select>
-        <div id="datetimepickr"></div>
-        <input id="entryInput" class="textBoxEntry"/>
+        
+        <div id="optionsContainer">
+          <h3 id="nameWelcome">Test</h3>
+          <div class="btn-group" role="group" aria-label="...">
+            <button type="button" class="btn btn-default" onclick="revealNew()">New</button>
+            <button type="button" class="btn btn-default" onclick="revealSearch()">Search</button>
+          </div>
+        </div>
+        
+        <div id="searchEntryContainer">
+          <p>Date: <input type="text" id="datepickerB"></p>
+        </div>
+        <div id="newEntryContainer">
+          <p>Date: <input type="text" id="datepickerA"></p>
+          <label>For category: </label><label id="subtype">Undefined</label>
+          <div id="datetimepickr"></div>
+          <textarea id="entryInput" class="textBoxEntry" disabled></textarea>
+        </div>
       </div>
     </div>
     <div  class="col-sm-2 sidenav">
