@@ -1,6 +1,7 @@
 
 
 var loadProviderTable = function(data){
+    data = JSON.parse(data);
     _.each(data, function(d){
         var html = `<tr><td>` + d.name +`</td>
                   <td>` + d.type +`</td>
@@ -24,7 +25,7 @@ var deleteProv = function(i)
 var load = function(){
     var test = $("#providerTableBody");
     if(document.getElementById("providerTable")){
-        getAllProviders();
+        getAllProvidersA();
     }
 }
 

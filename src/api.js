@@ -98,13 +98,88 @@ deleteSubject = function(name){
     });
 }
 
+ ////// Providers /////
+
 getAllProvidersA = function(){
     $.ajax({
         method : 'GET',
         url : url + "Providers/get.php",
         success : function(data){
             // console.log(data);
-            populateProviderTable(data);
+            loadProviderTable(data);
+        },
+        fail : function (){
+            console.log("error occred");
+        }
+    });
+}
+
+saveProvider = function(collection){
+    var strToSend= "name=" + collection.name +
+                    "&type=" + collection.type +
+                    "&pPhone=" + collection.pPhone +
+                    "&sPhone=" + collection.sPhone +
+                    "&comp=" + collection.comp;
+
+    $.ajax({
+        method : 'GET',
+        url : url + "Providers/save.php?" + strToSend,
+        success : function(data){
+            console.log(data);
+            if(data.includes("Success"))
+                {
+                    location.href = "providers_list.html";
+                }
+                else{
+                    $("p").text("A problem occured.");
+                }
+        },
+        fail : function (){
+            console.log("error occred");
+
+        }
+    });
+}
+
+deleteProvider = function(name){
+    $.ajax({
+        method : 'DELETE',
+        url : url + "Providers/delete.php?name=" + name,
+        success : function(data){
+            console.log(data);
+        },
+        fail : function (){
+            console.log("error occured");
+        }
+    });
+}
+
+getAllProvidersByName = function(name){
+    $.ajax({
+        method : 'GET',
+        url : url + "Providers/get.php?name=" + name,
+        success : function(data){
+            // console.log(data);
+            loadToForm(data);
+        },
+        fail : function (){
+            console.log("error occred");
+        }
+    });
+}
+
+updateProvider = function(collection){
+    var strToSend= "name=" + collection.name +
+                    "&type=" + collection.type +
+                    "&pPhone=" + collection.pPhone +
+                    "&sPhone=" + collection.sPhone +
+                    "&comp=" + collection.comp;
+    $.ajax({
+        method : 'GET',
+        url : url + "Providers/update.php?"+strToSend,
+        success : function(data){
+            // console.log(data);
+            location.href = "providers_list.html";
         },
         fail : function (){
             console.log("error occred");

@@ -5,14 +5,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="node_modules/jquery/dist/jquery.js"></script>
   <script src="node_modules/underscore/underscore.js"></script>
-
-  <script src="src/api.js"></script>
-  <script src="src/main.js"></script>
 
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
@@ -39,7 +36,7 @@
     .sidenav {
       padding-top: 20px;
       background-color: #f1f1f1;
-      height: 100%;
+      height: 120%;
     }
     
     /* Set black background color, white text and some padding */
@@ -73,10 +70,9 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Subjects</a></li>
-        <li><a href="#">Providers</a></li>
+        <li><a href="main.html">Home</a></li>
+        <li><a href="subjects_list.html">Subjects</a></li>
+        <li class="active"><a href="providers_list.html">Providers</a></li>
       </ul>
     </div>
   </div>
@@ -86,16 +82,32 @@
   <div class="row content">
     <div  class="col-sm-2 sidenav">
       <ul id="typesContainer">
-
+        <!--  -->
       </ul>
     </div>
     <div class="col-sm-8 text-left"> 
-      <h1>Welcome</h1>
-      <div id="datePicker"></div>
-      <hr>
-      <h3>Test</h3>
-      <p>Lorem ipsum...</p>
+        <h2> Create or Edit a Provider</h2>
+        <hr>
+        <p id="errors"></p>
+      <div class="formContainer"><label>Name: </label> <input class="form-control" type="text" id="nameInput"/></div>
+      <div class="formContainer"><label>Type: </label> 
+        <select class="form-control" type="text" id="typeInput">
+          <option value="Vet">Vet</option>
+          <option value="Farrier">Farrier</option>
+          <option value="Trainer">Trainer</option>
+          <option value="Alternative Therapist">Alternative Therapist</option>
+          <option value="Misc">Misc</option>          
+        </select>
+        </div>
+      <div class="formContainer"><label>Primary Phone: </label> <input class="form-control" type="text" id="pPhoneInput"/></div>
+      <div class="formContainer"><label>Secondary Phone: </label> <input class="form-control" type="text" id="sPhoneInput"/></div>
+      <div class="formContainer"><label>Clinic/Company: </label> <input class="form-control"type="text" id="compInput"/></div>
+        <div class="buttonContainer">
+            <button class="btn" id="clearBtn">Clear</button>
+            <button class="btn" id="saveBtn">Save</button>
+        </div>
     </div>
+
     <div id="categoryList" class="col-sm-2 sidenav">
       <!---->
     </div>
@@ -108,6 +120,9 @@
 
 
 </body>
+
+  <script src="src/api.js"></script>
+  <script src="src/provider_edit.js"></script>
 </html>
 
 
