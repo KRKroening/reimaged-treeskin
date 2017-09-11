@@ -1,4 +1,54 @@
 
+var saveEnt = function(){
+    
+    var entryText = $("#entryInput").val();
+    var date =$("#datepickerA")[0].value;
+    var type = $("#subtype").text();
+    var subject = $("#subjectContainer .selectedButton").text();
+    var collection = {
+        entry: entryText,
+        date : moment().unix(date),
+        type : type,
+        subject : subject
+    }
+    if (validateEntry(collection)){
+        saveEntry(collection);
+    }
+    else {
+        $("#errorAlert").text = "Please correct the form";
+    }
+}
+
+var validateEntry = function(collection){
+    if(collection.entry == "") return false;
+    if(collection.date == "") return false;
+    if(collection.type == "") return false;
+    if(collection.subject == "") return false;
+}
+
+var searchEntries = function(){
+    var dateFrom =$("#datepickerFrom")[0].value;
+    var dateTo =$("#datepickerTo")[0].value;
+    var type = $("#searchSubtype").text();
+    var provider = $("#provDDSearch").text();
+    var subject = $("#subjectContainer .selectedButton").text();
+    
+    var collection = {
+        dateFrom: moment().unix(dateFrom),
+        dateTo : moment().unix(dateTo),
+        type : type,
+        provider : provider,
+        subject : subject        
+    }
+    getEntries(collection);
+}
+
+var clearEntry = function() {
+    $("#entryInput").val("");
+    $("#datepickerA").val("");
+    $("#subtype").text("");
+}
+
 var revealNew = function(_this){
     $("#searchEntryContainer").hide();
     $("#newEntryContainer").show();
@@ -7,6 +57,33 @@ var revealNew = function(_this){
 var revealSearch = function(_this){
     $("#newEntryContainer").hide();
     $("#searchEntryContainer").show();
+}
+
+var populateEntrySearch = function(data){
+    data = JSON.parse(data);
+    _.each(data,function(d){
+        var row = `<tr>
+                    <td>` + d.date + `</td>
+                    <td>` + d.provider + `</td>
+                    <td>` + d.entry + `</td>
+                    <td>` + View + `</td>
+                    </tr>`
+        $("tbody").append(row);
+    });
+}
+
+var populateProviderDD = function(data){
+    data = JSON.parse(data);
+    _.each(data,function(d){
+        $('#provDDSearch').append($('<option>', { 
+            value: d.name,
+            text : d.name 
+        }));
+        $('#provDDNew').append($('<option>', { 
+            value: d.name,
+            text : d.name 
+        }));
+    })
 }
 
 var populateVisitType = function (data) {
@@ -21,8 +98,8 @@ var populateVisitType = function (data) {
         });
         $(_this.currentTarget).addClass("selectedButton");
         $("#subtype").text(_this.currentTarget.innerHTML);
+        $("#searchSubtype").text(_this.currentTarget.innerHTML);
         $("#entryInput").prop("disabled",false);
-        
     });
 };
 
@@ -44,7 +121,8 @@ var populateSubjectList = function (data) {
 
 var load = function () {
     flatpickr('#datepickerA');
-    flatpickr('#datepickerB');
+    flatpickr('#datepickerFrom');
+    flatpickr('#datepickerTo');
     
     $("#searchEntryContainer").hide();
     $("#newEntryContainer").hide();
@@ -56,6 +134,7 @@ var load = function () {
     if(document.getElementById("subjectList")){
         getAllSubjectsA();
     }
+    getAllProvidersB();
 };
 
 

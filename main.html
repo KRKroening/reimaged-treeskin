@@ -13,6 +13,7 @@
   <script src="node_modules/underscore/underscore.js"></script>
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script src="node_modules/flatpickr/dist/flatpickr.js"></script>
+  <script src="node_modules/moment/moment.js"></script>
   <link rel="stylesheet" href="node_modules/flatpickr/dist/flatpickr.css">
   
 
@@ -87,7 +88,7 @@
       <hr>
       
       <div id="mainContentContainer">
-        
+        <p id="errorAlert"></p>
         <div id="optionsContainer">
           <h3 id="nameWelcome">Test</h3>
           <div class="btn-group" role="group" aria-label="...">
@@ -97,15 +98,44 @@
         </div>
         
         <div id="searchEntryContainer">
-          <p>Date: <input type="text" id="datepickerB"></p>
+          <p>From date: <input type="text" id="datepickerFrom"></p>
+          <p>To date: <input type="text" id="datepickerTo"></p>
+          <p>Type: <label id="searchSubtype"></label></p>
+
+          <p>Provider</p>
+          <select id="provDDSearch">
+            <option id="any">Any</option>
+          </select>
+
+          <button type="button" onclick="searchEntries()">Search</button>
+
+          <table>
+            <thead>
+              <th>Date</th>
+              <th>Provider</th>
+              <th>Entry</th>
+              <th>Action</th>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+
+          
         </div>
         <div id="newEntryContainer">
           <p>Date: <input type="text" id="datepickerA"></p>
           <label>For category: </label><label id="subtype">Undefined</label>
-          <div id="datetimepickr"></div>
+          <p>Provider</p>
+          <select id="provDDNew">
+          </select>
           <textarea id="entryInput" class="textBoxEntry" disabled></textarea>
+          <div class="buttonContainer" role="group" aria-label="...">
+            <button type="button" class="btn btn-default" onclick="saveEnt()">Save</button>
+            <button type="button" class="btn btn-default" onclick="clearEntry()">Clear</button>
+          </div>
         </div>
       </div>
+
     </div>
     <div  class="col-sm-2 sidenav">
       <ul id="typesContainer">

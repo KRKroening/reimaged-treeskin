@@ -75,7 +75,7 @@ saveSubject = function(collection){
                     location.href = "subjects_list.html";
                 }
                 else{
-                    $("p").text("A problem occured.");
+                    $("#errorAlert").text("A problem occured.");
                 }
         },
         fail : function (){
@@ -114,6 +114,20 @@ getAllProvidersA = function(){
     });
 }
 
+getAllProvidersB = function(){
+    $.ajax({
+        method : 'GET',
+        url : url + "Providers/get.php",
+        success : function(data){
+            // console.log(data);
+            populateProviderDD(data);
+        },
+        fail : function (){
+            console.log("error occred");
+        }
+    });
+}
+
 saveProvider = function(collection){
     var strToSend= "name=" + collection.name +
                     "&type=" + collection.type +
@@ -131,7 +145,7 @@ saveProvider = function(collection){
                     location.href = "providers_list.html";
                 }
                 else{
-                    $("p").text("A problem occured.");
+                    $("#errorAlert").text("A problem occured.");
                 }
         },
         fail : function (){
@@ -180,6 +194,49 @@ updateProvider = function(collection){
         success : function(data){
             // console.log(data);
             location.href = "providers_list.html";
+        },
+        fail : function (){
+            console.log("error occred");
+        }
+    });
+}
+
+//  Entries
+
+saveEntry = function(collection){
+    $.ajax({
+        method : 'POST',
+        url : url + "Entries/save.php",
+        data: JSON.stringify(collection),
+        dataType: "xml/html/script/json", // expected format for response
+        contentType: "application/json",
+        success : function(data){
+            console.log(data);
+            if(data.includes("Success"))
+                {
+                    location.href = "main.html";
+                }
+                else{
+                    $("#errorAlert").text("A problem occured.");
+                }
+        },
+        fail : function (){
+            console.log("error occred");
+
+        }
+    });
+}
+
+getEntries = function(data){
+    $.ajax({
+        method : 'POST',
+        url : url + "Entries/get.php",
+        data : JSON.parse(data),
+        dataType: "xml/html/script/json", // expected format for response
+        contentType: "application/json",
+        success : function(data){
+            // console.log(data);
+            populateEntrySearch(data);
         },
         fail : function (){
             console.log("error occred");
