@@ -7,7 +7,7 @@ var saveEnt = function(){
     var subject = $("#subjectContainer .selectedButton").text();
     var collection = {
         entry: entryText,
-        date : moment().unix(date),
+        date : moment(date).unix(),
         type : type,
         subject : subject
     }
@@ -30,12 +30,12 @@ var searchEntries = function(){
     var dateFrom =$("#datepickerFrom")[0].value;
     var dateTo =$("#datepickerTo")[0].value;
     var type = $("#searchSubtype").text();
-    var provider = $("#provDDSearch").text();
+    var provider = $("#provDDSearch").val();
     var subject = $("#subjectContainer .selectedButton").text();
     
     var collection = {
-        dateFrom: moment().unix(dateFrom),
-        dateTo : moment().unix(dateTo),
+        dateFrom: moment(dateFrom).unix(),
+        dateTo : moment(dateTo).unix(),
         type : type,
         provider : provider,
         subject : subject        
@@ -63,10 +63,10 @@ var populateEntrySearch = function(data){
     data = JSON.parse(data);
     _.each(data,function(d){
         var row = `<tr>
-                    <td>` + d.date + `</td>
+                    <td>` + moment(d.date*1000).format("DD/MM/YYYY") + `</td>
                     <td>` + d.provider + `</td>
                     <td>` + d.entry + `</td>
-                    <td>` + View + `</td>
+                    <td>` + "View" + `</td>
                     </tr>`
         $("tbody").append(row);
     });

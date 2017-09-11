@@ -227,13 +227,15 @@ saveEntry = function(collection){
     });
 }
 
-getEntries = function(data){
+getEntries = function(collection){
+    var strToSend= "provider=" + collection.provider +
+                    "&subject=" + collection.subject +
+                    "&fromDate=" + collection.fromDate +
+                    "&type=" + collection.type +                    
+                    "&todate=" + collection.todate;
     $.ajax({
-        method : 'POST',
-        url : url + "Entries/get.php",
-        data : JSON.parse(data),
-        dataType: "xml/html/script/json", // expected format for response
-        contentType: "application/json",
+        method : 'GET',
+        url : url + "Entries/get.php?"+strToSend,
         success : function(data){
             // console.log(data);
             populateEntrySearch(data);
