@@ -10,7 +10,7 @@ var saveEnt = function(){
         entry: entryText,
         date : moment(date).unix(),
         type : type,
-        provider: provider
+        provider: provider,
         subject : subject
     }
     if (validateEntry(collection)){
