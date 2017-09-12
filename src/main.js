@@ -4,11 +4,13 @@ var saveEnt = function(){
     var entryText = $("#entryInput").val();
     var date =$("#datepickerA")[0].value;
     var type = $("#subtype").text();
+    var provider = $("#provDDNew").val();
     var subject = $("#subjectContainer .selectedButton").text();
     var collection = {
         entry: entryText,
         date : moment(date).unix(),
         type : type,
+        provider: provider
         subject : subject
     }
     if (validateEntry(collection)){
