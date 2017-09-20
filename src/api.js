@@ -9,7 +9,7 @@ getAllVisitTypes = function(){
         url : url + "Types/get.php",
         success : function(data){
             // console.log(data);
-            populateVisitType(data);
+            Main.populateVisitType(data);
         },
         fail : function (){
             console.log("error occred");
@@ -23,7 +23,7 @@ getAllSubjects = function(){
         url : url + "Subjects/get.php",
         success : function(data){
             // console.log(data);
-            loadSubjectTable(JSON.parse(data));
+            SubjectList.loadSubjectTable(JSON.parse(data));
         },
         fail : function (){
             console.log("error occred");
@@ -36,7 +36,7 @@ getAllSubjectsA = function(){
         url : url + "Subjects/get.php",
         success : function(data){
             // console.log(data);
-            populateSubjectList(data);
+            Main.populateSubjectList(data);
         },
         fail : function (){
             console.log("error occred");
@@ -50,7 +50,7 @@ getAllSubjectsByName = function(name){
         url : url + "Subjects/get.php?name=" + name,
         success : function(data){
             // console.log(data);
-            loadToForm(data);
+            SubjectEdit.loadToForm(data);
         },
         fail : function (){
             console.log("error occred");
@@ -106,7 +106,7 @@ getAllProvidersA = function(){
         url : url + "Providers/get.php",
         success : function(data){
             // console.log(data);
-            loadProviderTable(data);
+            ProviderList.loadProviderTable(data);
         },
         fail : function (){
             console.log("error occred");
@@ -120,7 +120,7 @@ getAllProvidersB = function(){
         url : url + "Providers/get.php",
         success : function(data){
             // console.log(data);
-            populateProviderDD(data);
+            Main.populateProviderDD(data);
         },
         fail : function (){
             console.log("error occred");
@@ -174,7 +174,7 @@ getAllProvidersByName = function(name){
         url : url + "Providers/get.php?name=" + name,
         success : function(data){
             // console.log(data);
-            loadToForm(data);
+            ProvidersEdit.loadToForm(data);
         },
         fail : function (){
             console.log("error occred");
@@ -238,10 +238,34 @@ getEntries = function(collection){
         url : url + "Entries/get.php?"+strToSend,
         success : function(data){
             // console.log(data);
-            populateEntrySearch(data);
+            Main.populateEntrySearch(data);
         },
         fail : function (){
             console.log("error occred");
+        }
+    });
+}
+
+updateEntry = function(collection){
+    $.ajax({
+        method : 'POST',
+        url : url + "Entries/update.php",
+        data: JSON.stringify(collection),
+        dataType: "xml/html/script/json", // expected format for response
+        contentType: "application/json",
+        success : function(data){
+            console.log(data);
+            if(data.includes("Success"))
+                {
+                    location.reload();
+                }
+                else{
+                    $("#errorAlert").text("A problem occured.");
+                }
+        },
+        fail : function (){
+            console.log("error occred");
+
         }
     });
 }

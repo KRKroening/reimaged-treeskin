@@ -6,15 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/style.css">
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="node_modules/jquery/dist/jquery.js"></script>
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
   <script src="node_modules/underscore/underscore.js"></script>
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> -->
   <script src="node_modules/flatpickr/dist/flatpickr.js"></script>
   <script src="node_modules/moment/moment.js"></script>
   <link rel="stylesheet" href="node_modules/flatpickr/dist/flatpickr.css">
+  
 
   <style>
     /* Remove the navbar's default margin-bottom and rounded borders */ 
@@ -81,6 +82,7 @@
     </div>
     <div class="col-sm-8 text-left"> 
       <h1>Welcome</h1>
+      <!-- <button id="forClass">Push </button> -->
       <hr>
       
       <div id="mainContentContainer">
@@ -88,8 +90,8 @@
         <div id="optionsContainer">
           <h3 id="nameWelcome">Test</h3>
           <div class="btn-group" role="group" aria-label="...">
-            <button type="button" class="btn btn-default" onclick="revealNew()">New</button>
-            <button type="button" class="btn btn-default" onclick="revealSearch()">Search</button>
+            <button type="button" class="btn btn-default" onclick="Main.revealNew()">New</button>
+            <button type="button" class="btn btn-default" onclick="Main.revealSearch()">Search</button>
           </div>
         </div>
         
@@ -98,12 +100,12 @@
           <p>To date: <input type="text" id="datepickerTo"></p>
           <p>Type: <label id="searchSubtype"></label></p>
 
-          <p>Provider</p>
+          <p>Provider: 
           <select id="provDDSearch">
             <option id="any">Any</option>
-          </select>
+          </select></p>
 
-          <button type="button" onclick="searchEntries()">Search</button>
+          <button type="button" onclick="Main.searchEntries()">Search</button>
 
           <table class="table stable-striped">
             <thead>
@@ -116,18 +118,24 @@
             </tbody>
           </table>
 
+          <!-- <div id="viewEntryBox">
+            <i class="glyphicon glyphicon-remove" onclick="$('#viewEntryBox').remove()">
+            <textarea id="entryUpdate"/>
+            <button type="button" onclick="updateEnt()">Update</button>
+          </div> -->
+
           
         </div>
         <div id="newEntryContainer">
           <p>Date: <input type="text" id="datepickerA"></p>
-          <label>For category: </label><label id="subtype">Undefined</label>
-          <p>Provider</p>
+          <p>Type: <label id="subtype"></label></p>
+          <p>Provider
           <select id="provDDNew">
-          </select>
+          </select></p>
           <textarea id="entryInput" class="textBoxEntry" disabled></textarea>
           <div class="buttonContainer" role="group" aria-label="...">
-            <button type="button" class="btn btn-default" onclick="saveEnt()">Save</button>
-            <button type="button" class="btn btn-default" onclick="clearEntry()">Clear</button>
+            <button type="button" class="btn btn-default" onclick="Main.saveEnt()">Save</button>
+            <button type="button" class="btn btn-default" onclick="Main.clearEntry()">Clear</button>
           </div>
         </div>
       </div>
@@ -150,6 +158,12 @@
 
   <script src="src/api.js"></script>
   <script src="src/main.js"></script>
+  
+  <script>
+    $(document).ready(function(){
+      Main.load();
+    });
+  </script>
 </html>
 
 
