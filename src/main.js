@@ -5,7 +5,7 @@ var Main = function(){
                 <i class="glyphicon glyphicon-remove" onclick="$('#viewEntryBox').remove()"></i>
                 <p> Date: <label id='updateDate'></label> Provider <label id='updateProv'></label></p>
                 <textarea id="entryUpdate"/>
-                <button type="button" onclick="updateEnt()">Update</button>
+                <button type="button" onclick="Main.updateEnt()">Update</button>
             </div>`;
 
     var openEntryViewer = function(_this){
@@ -203,6 +203,7 @@ var Main = function(){
         revealNew : revealNew,
         revealSearch : revealSearch,
         saveEnt : saveEnt,
+        updateEnt: updateEnt,
         searchEntries : searchEntries,
         openEntryViewer : openEntryViewer
     };

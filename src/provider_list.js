@@ -9,7 +9,7 @@ var ProviderList = function(){
                     <td>`+d.pPhone+`</td>
                     <td>`+d.sPhone+`</td>
                     <td>`+d.comp+`</td>
-                    <td><label class='iconHover' onclick='window.location.href = "providers_edit.html?mode=`+d.name+`";'>Edit</label> | <label  class='iconHover' onclick="deleteProv(this)">Delete</label></td>
+                    <td><label class='iconHover' onclick='window.location.href = "providers_edit.html?mode=`+d.name+`";'>Edit</label> | <label  class='iconHover' onclick="ProviderList.deleteProv(this)">Delete</label></td>
                     </tr>`;
             $("#providerTableBody").append(html);
         });
@@ -31,6 +31,7 @@ var ProviderList = function(){
     }
     return providerList = {
         load : load,
-        loadProviderTable : loadProviderTable
+        loadProviderTable : loadProviderTable,
+        deleteProv : deleteProv
     }
 }();

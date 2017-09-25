@@ -174,7 +174,7 @@ getAllProvidersByName = function(name){
         url : url + "Providers/get.php?name=" + name,
         success : function(data){
             // console.log(data);
-            ProvidersEdit.loadToForm(data);
+            ProviderEdit.loadToForm(data);
         },
         fail : function (){
             console.log("error occred");
