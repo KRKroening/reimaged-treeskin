@@ -230,9 +230,9 @@ saveEntry = function(collection){
 getEntries = function(collection){
     var strToSend= "provider=" + collection.provider +
                     "&subject=" + collection.subject +
-                    "&fromDate=" + collection.fromDate +
+                    "&fromDate=" + collection.dateFrom +
                     "&type=" + collection.type +                    
-                    "&todate=" + collection.todate;
+                    "&toDate=" + collection.dateTo;
     $.ajax({
         method : 'GET',
         url : url + "Entries/get.php?"+strToSend,
