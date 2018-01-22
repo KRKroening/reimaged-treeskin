@@ -3,60 +3,88 @@ var apikey = "c6ddf72b-6b5c-4a70-94b5-a7a36eeb2e9c";
 var baseURL = "https://cloud.mongodb.com/api/atlas/v1.0/groups/Treeskin/clusters/TS-01";
 var url = "http://localhost:8080/reimaged-treeskin-connector/";
 
-getAllVisitTypes = function(){
-    $.ajax({
-        method : 'GET',
-        url : url + "Types/get.php",
-        success : function(data){
-            // console.log(data);
-            Main.populateVisitType(data);
-        },
-        fail : function (){
-            console.log("error occred");
-        }
+
+function callAPI(url) {
+    return new Promise(function(resolve, reject) {
+      $.getJSON(url).then(function(data){
+          resolve(data)
+      });
     });
+}
+
+// getAllVisitTypes = function(){
+//     $.ajax({
+//         method : 'GET',
+//         url : url + "Types/get.php",
+//         success : function(data){
+//             // console.log(data);
+//             Main.populateVisitType(data);
+//         },
+//         fail : function (){
+//             console.log("error occred");
+//         }
+//     });
+// }
+
+getAllVisitTypes = function(){
+    // $.ajax({
+    //     method : 'GET',
+    //     url : url + "Types/get.php",
+    //     success : function(data){
+    //         // console.log(data);
+    //         Main.populateVisitType(data);
+    //     },
+    //     fail : function (){
+    //         console.log("error occred");
+    //     }
+    // });
+    return callAPI(url+"Types/get.php")
 }
 
 getAllSubjects = function(){
-    $.ajax({
-        method : 'GET',
-        url : url + "Subjects/get.php",
-        success : function(data){
-            // console.log(data);
-            SubjectList.loadSubjectTable(JSON.parse(data));
-        },
-        fail : function (){
-            console.log("error occred");
-        }
-    });
+    // $.ajax({
+    //     method : 'GET',
+    //     url : url + "Subjects/get.php",
+    //     success : function(data){
+    //         // console.log(data);
+    //         SubjectList.loadSubjectTable(JSON.parse(data));
+    //     },
+    //     fail : function (){
+    //         console.log("error occred");
+    //     }
+    // });
+    return callAPI(url+"Subjects/get.php")
 }
 getAllSubjectsA = function(){
-    $.ajax({
-        method : 'GET',
-        url : url + "Subjects/get.php",
-        success : function(data){
-            // console.log(data);
-            Main.populateSubjectList(data);
-        },
-        fail : function (){
-            console.log("error occred");
-        }
-    });
+    // $.ajax({
+    //     method : 'GET',
+    //     url : url + "Subjects/get.php",
+    //     success : function(data){
+    //         // console.log(data);
+    //         Main.populateSubjectList(data);
+    //     },
+    //     fail : function (){
+    //         console.log("error occred");
+    //     }
+    // });
+    return callAPI(url+"Subjects/get.php")
 }
 
 getAllSubjectsByName = function(name){
-    $.ajax({
-        method : 'GET',
-        url : url + "Subjects/get.php?name=" + name,
-        success : function(data){
-            // console.log(data);
-            SubjectEdit.loadToForm(data);
-        },
-        fail : function (){
-            console.log("error occred");
-        }
-    });
+    // $.ajax({
+    //     method : 'GET',
+    //     url : url + "Subjects/get.php?name=" + name,
+    //     success : function(data){
+    //         // console.log(data);
+    //         SubjectEdit.loadToForm(data);
+    //     },
+    //     fail : function (){
+    //         console.log("error occred");
+    //     }
+    // });
+    return callAPI(url+"Subjects/get.php?name="+name)    
 }
+
 
 saveSubject = function(collection){
     var strToSend= "name=" + collection.name +
@@ -100,32 +128,33 @@ deleteSubject = function(name){
 
  ////// Providers /////
 
-getAllProvidersA = function(){
-    $.ajax({
-        method : 'GET',
-        url : url + "Providers/get.php",
-        success : function(data){
-            // console.log(data);
-            ProviderList.loadProviderTable(data);
-        },
-        fail : function (){
-            console.log("error occred");
-        }
-    });
+getAllProviders = function(){
+    // $.ajax({
+    //     method : 'GET',
+    //     url : url + "Providers/get.php",
+    //     success : function(data){
+    //         // console.log(data);
+    //         ProviderList.loadProviderTable(data);
+    //     },
+    //     fail : function (){
+    //         console.log("error occred");
+    //     }
+    // });
+    return callAPI(url+"Providers/get.php")
 }
 
 getAllProvidersB = function(){
-    $.ajax({
-        method : 'GET',
-        url : url + "Providers/get.php",
-        success : function(data){
-            // console.log(data);
-            Main.populateProviderDD(data);
-        },
-        fail : function (){
-            console.log("error occred");
-        }
-    });
+    // $.ajax({
+    //     method : 'GET',
+    //     url : url + "Providers/get.php",
+    //     success : function(data){
+    //         // console.log(data);
+    //         Main.populateProviderDD(data);
+    //     },
+    //     fail : function (){
+    //         console.log("error occred");
+    //     }
+    // });
 }
 
 saveProvider = function(collection){
@@ -169,17 +198,18 @@ deleteProvider = function(name){
 }
 
 getAllProvidersByName = function(name){
-    $.ajax({
-        method : 'GET',
-        url : url + "Providers/get.php?name=" + name,
-        success : function(data){
-            // console.log(data);
-            ProviderEdit.loadToForm(data);
-        },
-        fail : function (){
-            console.log("error occred");
-        }
-    });
+    // $.ajax({
+    //     method : 'GET',
+    //     url : url + "Providers/get.php?name=" + name,
+    //     success : function(data){
+    //         // console.log(data);
+    //         ProviderEdit.loadToForm(data);
+    //     },
+    //     fail : function (){
+    //         console.log("error occred");
+    //     }
+    // });
+    return callAPI(url + "Providers/get.php?name=" + name)
 }
 
 updateProvider = function(collection){
@@ -233,17 +263,18 @@ getEntries = function(collection){
                     "&fromDate=" + collection.dateFrom +
                     "&type=" + collection.type +                    
                     "&toDate=" + collection.dateTo;
-    $.ajax({
-        method : 'GET',
-        url : url + "Entries/get.php?"+strToSend,
-        success : function(data){
-            // console.log(data);
-            Main.populateEntrySearch(data);
-        },
-        fail : function (){
-            console.log("error occred");
-        }
-    });
+    // $.ajax({
+    //     method : 'GET',
+    //     url : url + "Entries/get.php?"+strToSend,
+    //     success : function(data){
+    //         // console.log(data);
+    //         Main.populateEntrySearch(data);
+    //     },
+    //     fail : function (){
+    //         console.log("error occred");
+    //     }
+    // });
+    return callAPI("Entries/get.php?"+strToSend)
 }
 
 updateEntry = function(collection){

@@ -188,9 +188,9 @@ var Main = function(){
             getAllVisitTypes();
         }
         if(document.getElementById("subjectList")){
-            getAllSubjectsA();
+            getAllSubjects();
         }
-        getAllProvidersB();
+        getAllProviders();
     };
 
     return {

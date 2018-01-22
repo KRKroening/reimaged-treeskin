@@ -26,7 +26,7 @@ var ProviderList = function(){
     var load = function(){
         var test = $("#providerTableBody");
         if(document.getElementById("providerTable")){
-            getAllProvidersA();
+            getAllProviders();
         }
     }
     return providerList = {
