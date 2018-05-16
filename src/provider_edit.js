@@ -1,7 +1,7 @@
 var ProviderEdit = function() {
 
     var providerEdit = {};
-
+    var provid = ""   
     var providerModeName = "";
 
     function getQueryVariable(variable)
@@ -15,13 +15,23 @@ var ProviderEdit = function() {
         return(false);
     }
 
+    function setSelectedValue(selectObj, valueToSet) {
+        for (var i = 0; i < selectObj.options.length; i++) {
+            if (selectObj.options[i].text== valueToSet) {
+                selectObj.options[i].selected = true;
+                return;
+            }
+        }
+    }
+
     var loadToForm = function(data){
-        var jsData = JSON.parse(data)[0];
-        $("#nameInput").val(jsData.name);
-        $("#typeInput").val(jsData.type);
-        $("#compInput").val(jsData.comp);
-        $("#pPhoneInput").val(jsData.pPhone);
-        $("#sPhoneInput").val(jsData.sPhone);
+        // var jsData = JSON.parse(data)[0]; 
+        $("#nameInput").val(data.name);
+        // $("#typeInput").val(data.type);
+        setSelectedValue($("#typeInput")[0],data.type )
+        $("#compInput").val(data.comp);
+        $("#pPhoneInput").val(data.pPhone);
+        $("#sPhoneInput").val(data.sPhone);
     }
 
     var clearForm = function(){
@@ -51,7 +61,7 @@ var ProviderEdit = function() {
             }
             if($("#nameInput").prop("disabled"))
             {
-                updateProvider(collection);
+                updateProvider(provid,collection);
             } else {
                 saveProvider(collection);
             }
@@ -92,11 +102,13 @@ var ProviderEdit = function() {
 
 
     var load = function(){
-        var provName = getQueryVariable("mode");
-        if(provName != "new")
+        provid = getQueryVariable("mode");
+        if(provid != "new")
             {
                 $("#nameInput").prop("disabled", true);
-                getAllProvidersByName(provName);
+                $.when(getAllProvidersById(provid)).then(function(data){
+                    loadToForm(data)
+                });
             }
 
         $("#clearBtn").on("click", function()

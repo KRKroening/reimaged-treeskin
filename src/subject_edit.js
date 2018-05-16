@@ -2,6 +2,7 @@ var SubjectEdit = function(){
     
     var subjectEdit = {};
     var subjectModeName = "";
+    var id = "";
 
     function getQueryVariable(variable)
     {
@@ -15,12 +16,12 @@ var SubjectEdit = function(){
     }
 
     var loadToForm = function(data){
-        var jsData = JSON.parse(data)[0];
-        $("#nameInput").val(jsData.name);
-        $("#ageInput").val(jsData.age);
-        $("#genderInput").val(jsData.gender);
-        $("#breedInput").val(jsData.breed);
-        $("#colourInput").val(jsData.colour);
+        // var jsData = JSON.parse(data)[0];
+        $("#nameInput").val(data.name);
+        $("#ageInput").val(data.age);
+        $("#genderInput").val(data.gender);
+        $("#breedInput").val(data.breed);
+        $("#colourInput").val(data.colour);
     }
 
     var clearForm = function(){
@@ -49,7 +50,12 @@ var SubjectEdit = function(){
                 name: name
             }
 
-            saveSubject(collection);
+            if($("#nameInput").prop("disabled"))
+            {
+                updateSubject(id,collection);
+            } else {
+                saveSubject(collection);
+            }
         }
         else {
             $("p").text = "Please correct these errors.";
@@ -87,11 +93,13 @@ var SubjectEdit = function(){
 
 
     var load = function(){
-        var subName = getQueryVariable("mode");
-        if(subName != "new")
+        id = getQueryVariable("mode");
+        if(id != "new")
             {
                 $("#nameInput").prop("disabled", true);
-                getAllSubjectsByName(subName);
+                $.when(getSubjectById(id)).then(function(data){
+                    loadToForm(data);
+                });
             }
 
         $("#clearBtn").on("click", function()

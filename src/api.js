@@ -1,7 +1,7 @@
 
 var apikey = "c6ddf72b-6b5c-4a70-94b5-a7a36eeb2e9c";
 var baseURL = "https://cloud.mongodb.com/api/atlas/v1.0/groups/Treeskin/clusters/TS-01";
-var url = "http://localhost:8080/reimaged-treeskin-connector/";
+var url = "http://localhost:3000/";
 
 
 function callAPI(url) {
@@ -12,111 +12,67 @@ function callAPI(url) {
     });
 }
 
-// getAllVisitTypes = function(){
-//     $.ajax({
-//         method : 'GET',
-//         url : url + "Types/get.php",
-//         success : function(data){
-//             // console.log(data);
-//             Main.populateVisitType(data);
-//         },
-//         fail : function (){
-//             console.log("error occred");
-//         }
-//     });
-// }
-
 getAllVisitTypes = function(){
-    // $.ajax({
-    //     method : 'GET',
-    //     url : url + "Types/get.php",
-    //     success : function(data){
-    //         // console.log(data);
-    //         Main.populateVisitType(data);
-    //     },
-    //     fail : function (){
-    //         console.log("error occred");
-    //     }
-    // });
     return callAPI(url+"Types/get.php")
 }
 
+// Subjects
+
 getAllSubjects = function(){
-    // $.ajax({
-    //     method : 'GET',
-    //     url : url + "Subjects/get.php",
-    //     success : function(data){
-    //         // console.log(data);
-    //         SubjectList.loadSubjectTable(JSON.parse(data));
-    //     },
-    //     fail : function (){
-    //         console.log("error occred");
-    //     }
-    // });
-    return callAPI(url+"Subjects/get.php")
-}
-getAllSubjectsA = function(){
-    // $.ajax({
-    //     method : 'GET',
-    //     url : url + "Subjects/get.php",
-    //     success : function(data){
-    //         // console.log(data);
-    //         Main.populateSubjectList(data);
-    //     },
-    //     fail : function (){
-    //         console.log("error occred");
-    //     }
-    // });
-    return callAPI(url+"Subjects/get.php")
+    return callAPI(url+"Subjects/")
 }
 
-getAllSubjectsByName = function(name){
-    // $.ajax({
-    //     method : 'GET',
-    //     url : url + "Subjects/get.php?name=" + name,
-    //     success : function(data){
-    //         // console.log(data);
-    //         SubjectEdit.loadToForm(data);
-    //     },
-    //     fail : function (){
-    //         console.log("error occred");
-    //     }
-    // });
-    return callAPI(url+"Subjects/get.php?name="+name)    
+getSubjectById = function(id){
+    return callAPI(url+"Subjects/" + id)    
 }
 
 
 saveSubject = function(collection){
-    var strToSend= "name=" + collection.name +
-                    "&age=" + collection.age +
-                    "&gender=" + collection.gender +
-                    "&breed=" + collection.breed +
-                    "&colour=" + collection.colour;
+    var strToSend= {"name" : collection.name,
+                    "age" : collection.age,
+                    "gender" : collection.gender,
+                    "breed" : collection.breed,
+                    "colour" : collection.colour
+                }
 
     $.ajax({
-        method : 'GET',
-        url : url + "Subjects/insert.php?" + strToSend,
+        method : 'POST',
+        url : url + "Subjects/",
+        data : strToSend,
         success : function(data){
-            console.log(data);
-            if(data.includes("Success"))
-                {
-                    location.href = "subjects_list.html";
-                }
-                else{
-                    $("#errorAlert").text("A problem occured.");
-                }
+            location.href = "subjects_list.html";            
         },
         fail : function (){
             console.log("error occred");
-
         }
     });
 }
 
-deleteSubject = function(name){
+updateSubject = function(id,collection){
+    var strToSend= {"name" : collection.name,
+                    "age" : collection.age,
+                    "gender" : collection.gender,
+                    "breed" : collection.breed,
+                    "colour" : collection.colour
+                }
+    $.ajax({
+        method : 'PUT',
+        url : url + "Subjects/" + id ,
+        data : strToSend,
+        success : function(data){
+            // console.log(data);
+            location.href = "subjects_list.html";
+        },
+        fail : function (){
+            console.log("error occred");
+        }
+    });
+}
+
+deleteSubject = function(id){
     $.ajax({
         method : 'DELETE',
-        url : url + "Subjects/delete.php?name=" + name,
+        url : url + "Subjects/" + id,
         success : function(data){
             console.log(data);
         },
@@ -129,65 +85,38 @@ deleteSubject = function(name){
  ////// Providers /////
 
 getAllProviders = function(){
-    // $.ajax({
-    //     method : 'GET',
-    //     url : url + "Providers/get.php",
-    //     success : function(data){
-    //         // console.log(data);
-    //         ProviderList.loadProviderTable(data);
-    //     },
-    //     fail : function (){
-    //         console.log("error occred");
-    //     }
-    // });
-    return callAPI(url+"Providers/get.php")
+    return callAPI(url+"Providers/")
 }
 
-getAllProvidersB = function(){
-    // $.ajax({
-    //     method : 'GET',
-    //     url : url + "Providers/get.php",
-    //     success : function(data){
-    //         // console.log(data);
-    //         Main.populateProviderDD(data);
-    //     },
-    //     fail : function (){
-    //         console.log("error occred");
-    //     }
-    // });
+getAllProvidersById = function(id){
+    return callAPI(url + "Providers/" + id)
 }
 
 saveProvider = function(collection){
-    var strToSend= "name=" + collection.name +
-                    "&type=" + collection.type +
-                    "&pPhone=" + collection.pPhone +
-                    "&sPhone=" + collection.sPhone +
-                    "&comp=" + collection.comp;
+    var strToSend= {"name" : collection.name,
+                    "type" : collection.type,
+                    "pPhone" : collection.pPhone,
+                    "sPhone" : collection.sPhone,
+                    "comp" : collection.comp
+                }
 
     $.ajax({
-        method : 'GET',
-        url : url + "Providers/save.php?" + strToSend,
+        method : 'POST',
+        url : url + "Providers",
+        data : strToSend,
         success : function(data){
-            console.log(data);
-            if(data.includes("Success"))
-                {
-                    location.href = "providers_list.html";
-                }
-                else{
-                    $("#errorAlert").text("A problem occured.");
-                }
+            location.href = "providers_list.html";
         },
         fail : function (){
             console.log("error occred");
-
         }
     });
 }
 
-deleteProvider = function(name){
+deleteProvider = function(id){
     $.ajax({
         method : 'DELETE',
-        url : url + "Providers/delete.php?name=" + name,
+        url : url + "Providers/" + id,
         success : function(data){
             console.log(data);
         },
@@ -197,30 +126,17 @@ deleteProvider = function(name){
     });
 }
 
-getAllProvidersByName = function(name){
-    // $.ajax({
-    //     method : 'GET',
-    //     url : url + "Providers/get.php?name=" + name,
-    //     success : function(data){
-    //         // console.log(data);
-    //         ProviderEdit.loadToForm(data);
-    //     },
-    //     fail : function (){
-    //         console.log("error occred");
-    //     }
-    // });
-    return callAPI(url + "Providers/get.php?name=" + name)
-}
-
-updateProvider = function(collection){
-    var strToSend= "name=" + collection.name +
-                    "&type=" + collection.type +
-                    "&pPhone=" + collection.pPhone +
-                    "&sPhone=" + collection.sPhone +
-                    "&comp=" + collection.comp;
+updateProvider = function(id,collection){
+    var strToSend= {"name" : collection.name,
+                    "type" : collection.type,
+                    "pPhone" : collection.pPhone,
+                    "sPhone" : collection.sPhone,
+                    "comp" : collection.comp
+                }
     $.ajax({
-        method : 'GET',
-        url : url + "Providers/update.php?"+strToSend,
+        method : 'PUT',
+        url : url + "Providers/" + id ,
+        data : strToSend,
         success : function(data){
             // console.log(data);
             location.href = "providers_list.html";

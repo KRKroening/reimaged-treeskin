@@ -1,15 +1,15 @@
-var SubjectList = function(){
+var SubjectList = (function($){
 
     var subjectList = {};
 
     var loadSubjectTable = function(data){
         _.each(data, function(d){
-            var html = `<tr><td>` + d.name +`</td>
+            var html = `<tr><td data-id=`+ d._id +`>` + d.name +`</td>
                     <td>` + d.age +`</td>
                     <td>`+d.gender+`</td>
                     <td>`+d.breed+`</td>
                     <td>`+d.colour+`</td>
-                    <td><label class='iconHover' onclick='window.location.href = "subjects_edit.html?mode=`+d.name+`";'>Edit</label> | <label  class='iconHover' onclick="deleteSub(this)">Delete</label></td>
+                    <td><label class='iconHover' onclick='window.location.href = "subjects_edit.html?mode=`+d._id+`";'>Edit</label> | <label  class='iconHover' onclick="SubjectList.deleteSub(this)">Delete</label></td>
                     </tr>`;
             $("#subjectTableBody").append(html);
         });
@@ -17,8 +17,8 @@ var SubjectList = function(){
 
     var deleteSub = function(i)
     {
-        var name = $(i).parent().parent().children()[0].innerHTML;
-        deleteSubject(name);
+        var id = $(i).parent().parent().children()[0].dataset["id"];
+        deleteSubject(id);
         location.reload();
     }
 
@@ -26,11 +26,20 @@ var SubjectList = function(){
     var load = function(){
         var test = $("#subjectTableBody");
         if(document.getElementById("subjectTable")){
-            getAllSubjects();
+            $.when(getAllSubjects()).then(function(data){
+                loadSubjectTable(data);
+            });
         }
     }
+
+    var testMath = function(a,b,c){
+        return a+b+c;
+    }
+
      return {
          load : load,
-         loadSubjectTable : loadSubjectTable
+         loadSubjectTable : loadSubjectTable,
+         testMath : testMath,
+         deleteSub: deleteSub
      }
-}();
+})(jQuery);
