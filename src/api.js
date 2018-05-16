@@ -13,7 +13,7 @@ function callAPI(url) {
 }
 
 getAllVisitTypes = function(){
-    return callAPI(url+"Types/get.php")
+    return callAPI(url+"Types/")
 }
 
 // Subjects

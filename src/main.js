@@ -102,8 +102,7 @@ var Main = function(){
         $("#searchEntryContainer").show();
     }
 
-    var populateEntrySearch = function(data){
-        data = JSON.parse(data);
+    var populateEntrySearch = function(data){        
         _.each(data,function(d){
             var row = `<tr>
                             <td>` + moment(d.date*1000).format("DD/MM/YYYY") + `</td>
@@ -115,8 +114,7 @@ var Main = function(){
         });
     }
 
-    var populateProviderDD = function(data){
-        data = JSON.parse(data);
+    var populateProviderDD = function(data){        
         _.each(data,function(d){
             $('#provDDSearch').append($('<option>', { 
                 value: d.name,
@@ -129,8 +127,7 @@ var Main = function(){
         })
     }
 
-    var populateVisitType = function (data) {
-        data = JSON.parse(data);
+    var populateVisitType = function (data) {    
         _.each(data, function(r){
             var objHTML = "<li class='leftTypeNav' href='#'>"+ r.name +"</li>"
             $("#typesContainer").append(objHTML);
@@ -146,8 +143,7 @@ var Main = function(){
         });
     };
 
-    var populateSubjectList = function (data) {
-        data = JSON.parse(data);
+    var populateSubjectList = function (data) {        
         _.each(data, function(r){
             var objHTML = "<li class='leftTypeNav' href='#'>"+ r.name +"</li>"
             $("#subjectContainer").append(objHTML);
@@ -185,12 +181,18 @@ var Main = function(){
         $("#optionsContainer").hide();
         
         if(document.getElementById("typesContainer")){
-            getAllVisitTypes();
+            $.when(getAllVisitTypes()).then(function(data){
+                populateVisitType(data);
+            })
         }
         if(document.getElementById("subjectList")){
-            getAllSubjects();
+            $.when(getAllSubjects()).then(function(data){
+                populateSubjectList(data)
+            })
         }
-        getAllProviders();
+        $.when(getAllProviders()).then(function(data){
+            populateProviderDD(data)
+        })
     };
 
     return {
