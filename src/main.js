@@ -15,25 +15,27 @@ var Main = function(){
         var entry = row[2].innerHTML;
         var prov = row[1].innerHTML;
         var date = row[0].innerHTML;
-        $('#entryUpdate').val(entry);
+        $('#entryUpdate').val(entry).attr('data-id', row[0].dataset["id"]);
         $('#updateDate').text(date);
         $('#updateProv').text(prov);
     }
 
     var updateEnt = function(){
+        event.preventDefault();
         var entryText = $("#entryUpdate").val();
         var date =$("#updateDate").text();
         var type = $("#subtype").text();
         var provider = $("#updateProv").text();
         var subject = $("#subjectContainer .selectedButton").text();
-        var collection = {
+        var id = $("#entryUpdate").attr('data-id')
+        var collection = {            
             entry: entryText,
-            date : moment(date,"DD/MM/YYYY").format("X"),
+            date : parseInt(moment(date,"DD/MM/YYYY").format("X")),
             type : type,
             provider: provider,
             subject : subject
         }
-        updateEntry(collection);
+        updateEntry(id,collection);
         location.reload();
     }
 
@@ -83,7 +85,9 @@ var Main = function(){
             provider : provider,
             subject : subject        
         }
-        getEntries(collection);
+        $.when(getEntries(collection)).then(function(data){
+            populateEntrySearch(data);
+        })
     }
 
     var clearEntry = function() {
@@ -105,7 +109,7 @@ var Main = function(){
     var populateEntrySearch = function(data){        
         _.each(data,function(d){
             var row = `<tr>
-                            <td>` + moment(d.date*1000).format("DD/MM/YYYY") + `</td>
+                            <td data-id=`+d._id+`>` + moment(d.date).format("DD/MM/YYYY") + `</td>
                             <td>` + d.provider + `</td>
                             <td class="entryCell">` + d.entry + `</td>
                             <td><i class="glyphicon glyphicon-search" onclick="Main.openEntryViewer(this)"></i></td>

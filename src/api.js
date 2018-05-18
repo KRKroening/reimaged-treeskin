@@ -150,65 +150,42 @@ updateProvider = function(id,collection){
 //  Entries
 
 saveEntry = function(collection){
+    var strToSend= {"entry" : collection.entry,
+                    "provider" : collection.provider,
+                    "date" : collection.date,
+                    "type" : collection.type,
+                    "subject" : collection.subject
+                }
     $.ajax({
         method : 'POST',
-        url : url + "Entries/save.php",
-        data: JSON.stringify(collection),
-        dataType: "xml/html/script/json", // expected format for response
-        contentType: "application/json",
-        success : function(data){
-            console.log(data);
-            if(data.includes("Success"))
-                {
-                    location.href = "main.html";
-                }
-                else{
-                    $("#errorAlert").text("A problem occured.");
-                }
+        url : url + "Entrys/",
+        data: strToSend,        
+        success : function(data){        
+            location.href = "main.html";
         },
         fail : function (){
             console.log("error occred");
-
         }
     });
 }
 
 getEntries = function(collection){
+    collection.provider == "Any"? collection.provider = "" : collection.provider = collection.provider
     var strToSend= "provider=" + collection.provider +
                     "&subject=" + collection.subject +
                     "&fromDate=" + collection.dateFrom +
                     "&type=" + collection.type +                    
                     "&toDate=" + collection.dateTo;
-    // $.ajax({
-    //     method : 'GET',
-    //     url : url + "Entries/get.php?"+strToSend,
-    //     success : function(data){
-    //         // console.log(data);
-    //         Main.populateEntrySearch(data);
-    //     },
-    //     fail : function (){
-    //         console.log("error occred");
-    //     }
-    // });
-    return callAPI("Entries/get.php?"+strToSend)
+    return callAPI(url+"entrys?"+strToSend)
 }
 
-updateEntry = function(collection){
+updateEntry = function(id,collection){
     $.ajax({
-        method : 'POST',
-        url : url + "Entries/update.php",
-        data: JSON.stringify(collection),
-        dataType: "xml/html/script/json", // expected format for response
-        contentType: "application/json",
-        success : function(data){
-            console.log(data);
-            if(data.includes("Success"))
-                {
-                    location.reload();
-                }
-                else{
-                    $("#errorAlert").text("A problem occured.");
-                }
+        method : 'PUT',
+        url : url + "entrys/" + id,
+        data: collection,
+        success : function(data){            
+                location.reload();
         },
         fail : function (){
             console.log("error occred");
