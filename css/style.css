@@ -1,4 +1,45 @@
 
+.navbar {
+    margin-bottom: 0;
+    border-radius: 0;
+    z-index: 9999;
+    }
+
+.sidenav-left {
+    padding-top: 60px;
+    background-color: #f1f1f1;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 9000;
+  }
+
+  .sidenav-right{
+    padding-top: 60px;
+    background-color: #f1f1f1;
+    height: 100%;
+    position: fixed;
+    right:0;
+    top: 0;
+    z-index: 9000;
+  }
+  
+  /* Set black background color, white text and some padding */
+  footer {
+    background-color: #555;
+    color: white;
+    padding: 15px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+  }
+
+/*  */
+#subjectContainer{
+    padding-left: 0;
+}
+
 .leftTypeNav {
     text-align: left;
     text-decoration: none;
@@ -129,4 +170,16 @@ i:hover{
     padding: 20px;
     border: 1px solid gray;
     background-color: #ececec;
+}
+
+.main-container{
+    width: 65%;
+    margin: 0 auto;
+    position: relative;
+    left: 16%;
+    margin: 15px;
+}
+
+.main-container h1{
+    text-align: center;
 }

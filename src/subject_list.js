@@ -1,11 +1,11 @@
-var SubjectList = (function($){
+var SubjectList = (function($, moment){
 
     var subjectList = {};
 
     var loadSubjectTable = function(data){
         _.each(data, function(d){
             var html = `<tr><td data-id=`+ d._id +`>` + d.name +`</td>
-                    <td>` + d.age +`</td>
+                    <td>` + (parseInt(moment().format('YYYY')) - d.age) +`</td>
                     <td>`+d.gender+`</td>
                     <td>`+d.breed+`</td>
                     <td>`+d.colour+`</td>
@@ -42,4 +42,4 @@ var SubjectList = (function($){
          testMath : testMath,
          deleteSub: deleteSub
      }
-})(jQuery);
+})(jQuery, moment);

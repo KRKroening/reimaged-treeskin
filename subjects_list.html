@@ -5,13 +5,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css?q=122">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="node_modules/jquery/dist/jquery.js"></script>
   <script src="node_modules/underscore/underscore.js"></script>
-
-
+  <script src="node_modules/moment/moment.js"></script>  
 
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
@@ -26,27 +25,30 @@
 
   <style>
     /* Remove the navbar's default margin-bottom and rounded borders */ 
-    .navbar {
+    /* .navbar {
       margin-bottom: 0;
       border-radius: 0;
-    }
+    } */
     
     /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
     .row.content {height: 450px}
     
     /* Set gray background color and 100% height */
-    .sidenav {
+    /* .sidenav {
       padding-top: 20px;
       background-color: #f1f1f1;
       height: 100%;
     }
     
     /* Set black background color, white text and some padding */
-    footer {
+    /*footer {
       background-color: #555;
       color: white;
       padding: 15px;
-    }
+      position: fixed;
+      bottom:0;
+      width: 75%;
+    } */
     
     /* On small screens, set height to 'auto' for sidenav and grid */
     @media screen and (max-width: 767px) {
@@ -82,9 +84,9 @@
   
 <div class="container-fluid text-center">    
   <div class="row content">
-    <div  class="col-sm-2 sidenav">
+    <div  class="col-sm-2 sidenav-left">
     </div>
-    <div class="col-sm-8 text-left"> 
+    <div class="col-sm-8 text-left main-content" style="left:16.5%;"> 
       <h1>Subject List</h1>
       <hr>
       <p>View, edit, or create new Subject</p>
@@ -105,7 +107,7 @@
 
       </div>
     </div>
-    <div id="categoryList" class="col-sm-2 sidenav">
+    <div id="categoryList" class="col-sm-2 sidenav-right">
       <!---->
     </div>
   </div>
@@ -119,7 +121,7 @@
 </body>
 
   <script src="src/api.js"></script>
-  <script src="src/subject_list.js?q=115"></script>
+  <script src="src/subject_list.js?q=125"></script>
   <script>
     $(document).ready(SubjectList.load);
   </script>
