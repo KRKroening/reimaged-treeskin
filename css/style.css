@@ -167,9 +167,12 @@ i:hover{
 }
 
 #viewEntryBox {
+    margin-left: 20px;
     padding: 20px;
     border: 1px solid gray;
     background-color: #ececec;
+    margin: 0 0 15px 10px;
+    width: 100%;
 }
 
 .main-container{

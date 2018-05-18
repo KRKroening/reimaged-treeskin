@@ -10,7 +10,7 @@ var Main = function(){
 
     var openEntryViewer = function(_this){
         $('#viewEntryBox').remove();
-        $('table').after(entryBoxHMTL);
+        $(_this.parentNode.parentNode).after(entryBoxHMTL);
         var row = $(_this).parent().parent().children();
         var entry = row[2].innerHTML;
         var prov = row[1].innerHTML;
@@ -75,6 +75,7 @@ var Main = function(){
         var dateFrom =$("#datepickerFrom")[0].value;
         var dateTo =$("#datepickerTo")[0].value;
         var type = $("#searchSubtype").text();
+        var contains = $("#containsSearch").val();
         var provider = $("#provDDSearch").val();
         var subject = $("#subjectContainer .selectedButton").text();
         
@@ -82,6 +83,7 @@ var Main = function(){
             dateFrom: moment(dateFrom).unix(),
             dateTo : moment(dateTo).unix(),
             type : type,
+            contains: contains,
             provider : provider,
             subject : subject        
         }

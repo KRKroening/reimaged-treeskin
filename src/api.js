@@ -171,7 +171,9 @@ saveEntry = function(collection){
 
 getEntries = function(collection){
     collection.provider == "Any"? collection.provider = "" : collection.provider = collection.provider
+
     var strToSend= "provider=" + collection.provider +
+                    "&contains=" + collection.contains +
                     "&subject=" + collection.subject +
                     "&fromDate=" + collection.dateFrom +
                     "&type=" + collection.type +                    
