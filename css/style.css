@@ -36,11 +36,16 @@
   }
 
 /*  */
+.form-control{
+    min-width: 200px!important;
+}
+
 #subjectContainer{
     padding-left: 0;
 }
 
 .leftTypeNav {
+    border-radius: 4px; 
     text-align: left;
     text-decoration: none;
     background-color: #333030;
@@ -64,11 +69,6 @@
     text-decoration: none;
 }
 
-#typesContainer {
-    list-style: none;
-    padding-left: 0;
-
-}
 
 .iconHover:hover { 
     cursor: pointer!important;
@@ -92,7 +92,6 @@
 }
 
 .formContainer label{
-    /* width: 150px; */
     margin-right: 5px;
 }
 
@@ -115,28 +114,18 @@
     background-color : #0a0808;
 }
 
-#searchEntryContainer p {
-    text-align: right;
-    width: 250px;
-}
-
-#searchEntryContainer label {
-    width: 174px;
-    border: 1px solid darkgrey;
-    text-align: left;
-    height: 26px;
+#searchEntryContainer div{
+    width: 30%;
 }
 
 #newEntryContainer p {
-    text-align: right;
-    width: 250px;
+    width: 30%;
 }
 
-#newEntryContainer label {
-    width: 174px;
-    border: 1px solid darkgrey;
-    text-align: left;
-    height: 26px;
+#newEntryContainer textarea {
+    height: 150px;
+    margin-bottom: 20px;
+    min-width: 200px;
 }
 
 select {
@@ -185,4 +174,89 @@ i:hover{
 
 .main-container h1{
     text-align: center;
+}
+
+.typeSelection-parent{
+    left: -130px;
+    margin-top: 30px;  
+}
+
+.typeSelection{
+    background-color: #333030;
+    color:#ececec;
+    width: 100px;
+    border-radius: 4px;
+    margin: 5px;
+    padding: 5px 10px;
+}
+
+.typeSelection:hover {
+    text-align: left;
+    text-decoration: none;
+    background-color: #0a0808;
+    cursor:pointer;
+}
+
+#typesContainer {
+    list-style: none;
+    padding-left: 0;
+    display: flex;
+}
+
+#welcome-msg{
+    margin: 0 auto;
+    width: 340px;
+}
+
+#customFrequencyContainer{
+    margin: 20px;
+    margin-bottom: 30px;
+}
+#customValue{
+    width: 5%;
+}
+
+#customInput{
+    width: 10%;
+    display: inline;
+}
+
+#startFromDate{
+    display: block;
+}
+#activeInput{
+    min-width: 10px!important;
+    margin-left: 5px;
+    width: 3%;
+}
+
+.ResolvedWarning{
+    background-color:orangered;
+}
+
+.backToPage{
+    list-style: none;
+    color: #3A362F;
+    padding-left: 0;
+    padding-top: 10px;
+}
+
+.backToPage:hover{
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+    list-style: none;    
+}
+
+.backToPage a:hover{
+    text-decoration: none;
+    color: black;  
+}
+
+#errors{
+    width: 90%;
+    padding: 10px 20px;
+    background-color: firebrick;
+    border-radius: 4px;
+    color: floralwhite; 
 }

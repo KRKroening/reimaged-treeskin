@@ -4,11 +4,14 @@
   <title>Treeskin</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/style.css?q=193">
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css?q=19mocha tutorial with nodejs
+  3">
   <script src="node_modules/jquery/dist/jquery.js"></script>
   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+  <script src="node_modules/bootstrap/bootstrap.min.js"></script>
 
   <script src="node_modules/underscore/underscore.js"></script>
   <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> -->
@@ -70,60 +73,61 @@
   </style>
 </head>
 <body>
-
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-      <a class="navbar-brand" href="#">Logo</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="main.html">Home</a></li>
-        <li><a href="subjects_list.html">Subjects</a></li>
-        <li><a href="providers_list.html">Providers</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
+  <div id='placeholder'></div>
   
 <div class="container-fluid text-center">    
   <div class="row content">
     <div id="subjectList" class="col-sm-2 sidenav-left">
       <ul id="subjectContainer">
-
+        <!-- <li class='leftTypeNav' href='#'>Scooter</li>
+        <li class='leftTypeNav' href='#'>Julius</li>
+        <li class='leftTypeNav' href='#'>Skitty</li>
+        <li class='leftTypeNav' href='#'>Boo</li>
+        <li class='leftTypeNav' href='#'>Browner</li>       -->
       </ul>
     </div>
     <div class="col-sm-8 text-left main-container"> 
-      <h1>Welcome</h1>
+      <h1>Entry Log</h1>
       <!-- <button id="forClass">Push </button> -->
       <hr>
-      
+      <p style="display:none" id="errors"></p>
       <div id="mainContentContainer">
         <p id="errorAlert"></p>
+        <p id="welcome-msg">Select a herd member from the list to record an entry.</p>
         <div id="optionsContainer">
           <h3 id="nameWelcome">Test</h3>
           <div class="btn-group" role="group" aria-label="...">
             <button type="button" class="btn btn-default" onclick="Main.revealNew()">New</button>
             <button type="button" class="btn btn-default" onclick="Main.revealSearch()">Search</button>
           </div>
+          <div  class="col-sm-2 typeSelection-parent">
+            <ul id="typesContainer">
+              <li class='typeSelection' href='#'>Trainer</li>
+              <li class='typeSelection' href='#'>Vet</li>
+              <li class='typeSelection' href='#'>Alternative</li>
+              <li class='typeSelection' href='#'>Farrier</li>
+              <li class='typeSelection' href='#'>Self</li>
+            </ul>
+          </div>
         </div>
+
         
         <div id="searchEntryContainer">
-          <p>From date: <input type="text" id="datepickerFrom"></p>
-          <p>To date: <input type="text" id="datepickerTo"></p>
-          <p>Type: <label id="searchSubtype"></label></p>
-          <p>Contains: <input type="text" id="containsSearch"></p>
+          <div>
+            <p>From date: <input class="form-control" type="text" id="datepickerFrom"></p>
+            <p>To date: <input class="form-control" type="text" id="datepickerTo"></p>
+          </div>
+          <div>
+            <p>Type: <label class="form-control" id="searchSubtype"></label></p>
+            <p>Contains: <input class="form-control" type="text" id="containsSearch"></p>
+          </div>
+          <div>
           <p>Provider: 
-          <select id="provDDSearch">
-            <option id="any">Any</option>
-          </select></p>
+            <select class="form-control" id="provDDSearch">          
+            </select></p>
+          </div>
 
-          <button type="button" onclick="Main.searchEntries()">Search</button>
+          <button class="btn" type="button" onclick="Main.searchEntries()">Search</button>
 
           <table class="table stable-striped">
             <thead>
@@ -145,12 +149,13 @@
           
         </div>
         <div id="newEntryContainer">
-          <p>Date: <input type="text" id="datepickerA"></p>
-          <p>Type: <label id="subtype"></label></p>
+          <p>Date: <input class="form-control" type="text" id="datepickerA"></p>
+          <p>Type: <label class="form-control" id="subtype"></label></p>
           <p>Provider
-          <select id="provDDNew">
+          <select class="form-control" id="provDDNew">
+              <option id="any">...</option>
           </select></p>
-          <textarea id="entryInput" class="textBoxEntry" disabled></textarea>
+          <textarea id="entryInput" class="form-control textBoxEntry" disabled></textarea>
           <div class="buttonContainer" role="group" aria-label="...">
             <button type="button" class="btn btn-default" onclick="Main.saveEnt()">Save</button>
             <button type="button" class="btn btn-default" onclick="Main.clearEntry()">Clear</button>
@@ -158,11 +163,8 @@
         </div>
       </div>
 
-    </div>
-    <div  class="col-sm-2 sidenav-right">
-      <ul id="typesContainer">
-
-      </ul>
+    </div>    
+    <div id="subjectList" class="col-sm-2 sidenav-right">
     </div>
   </div>
 </div>
@@ -173,12 +175,13 @@
 
 
 </body>
-
+  <script src="templating/header.js"></script>
   <script src="src/api.js?a=182"></script>
   <script src="src/main.js?a=118"></script>
   
   <script>
     $(document).ready(function(){
+
       Main.load();
     });
   </script>

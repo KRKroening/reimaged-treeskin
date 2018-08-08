@@ -1,14 +1,14 @@
 var ProviderList = function(){
     var providerList = {};
 
-    var loadProviderTable = function(data){        
+    var loadProviderTable = function(data){ 
         _.each(data, function(d){
-            var html = `<tr><td data-id=`+ d._id +`>` + d.name +`</td>
+            var html = `<tr><td data-id=`+ d.id +`>` + d.name +`</td>
                     <td>` + d.type +`</td>
                     <td>`+d.pPhone+`</td>
                     <td>`+d.sPhone+`</td>
                     <td>`+d.comp+`</td>
-                    <td><label class='iconHover' onclick='window.location.href = "providers_edit.html?mode=`+d._id+`";'>Edit</label> | <label  class='iconHover' onclick="ProviderList.deleteProv(this)">Delete</label></td>
+                    <td><label class='iconHover' onclick='window.location.href = "providers_edit.html?mode=`+d.id+`";'>Edit</label> | <label  class='iconHover' onclick="ProviderList.deleteProv(this)">Delete</label></td>
                     </tr>`;
             $("#providerTableBody").append(html);
         });

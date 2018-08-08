@@ -25,9 +25,8 @@ var ProviderEdit = function() {
     }
 
     var loadToForm = function(data){
-        // var jsData = JSON.parse(data)[0]; 
-        $("#nameInput").val(data.name);
-        // $("#typeInput").val(data.type);
+        data = data[0]
+        $("#nameInput").val(data.name);        
         setSelectedValue($("#typeInput")[0],data.type )
         $("#compInput").val(data.comp);
         $("#pPhoneInput").val(data.pPhone);
@@ -45,7 +44,11 @@ var ProviderEdit = function() {
     }
 
     var saveForm = function(){
-        if(!validateForm()){
+        $("#errors").hide()
+        $("#errors").empty()         
+        
+        var validated = validateForm()
+        if(validated.length< 1){
             var type = $("#typeInput").val();
             var name = $("#nameInput").val();
             var pPhone = $("#pPhoneInput").val();
@@ -63,39 +66,50 @@ var ProviderEdit = function() {
             {
                 updateProvider(provid,collection);
             } else {
+                collection.id = "P" + Math.random().toString(36).replace(/\./g,"a");
                 saveProvider(collection);
             }
         }
         else {
-            $("p").text = "Please correct these errors.";
+            $("#errors").show() 
+                
+            $("#errors").append("Errors in submitting the Subject: \n")                
+            validated.forEach( v => {
+                $("#errors").append(v + "\n")
+            })
         }
     }
 
-    var validateForm = function()
-    {
+    var validateForm = function(){
+        $("#errors").empty()
         _.each($("input"),function(i){
             $(i).css("border","1px #ccc solid");
         });
-        var flag = false;
+        var flag = [];
         if($("#typeInput").val() == ""){
             $("#typeInput").css("border","2px red solid");
-            flag = true;
+            flag.push("Type is required.");
         }
         if($("#pPhoneInput").val() == ""){
             $("#pPhoneInput").css("border","2px red solid");
-            flag = true;
+            flag.push("Primary Phone number is required.");
         }
-        if($("#sPhoneInput").val() == ""){
+        if(!/(\(\d{3}\).?\d{3}-\d{4}|\b\d{11}\b|\b\d{10}\b|\d-\d{3}-\d{3}-\d{4}|\d{3}-\d{3}-\d{4})/.test($("#pPhoneInput").val())){
+            $("#pPhoneInput").css("border","2px red solid");
+            flag.push("Phone number is not real or not in a recognized format.");
+        }
+        if($("#sPhoneInput").val() !== "" &&
+                !/(\(\d{3}\)\d{3}-\d{4}|\b\d{11}\b|\b\d{10}\b|\d-\d{3}-\d{3}-\d{4}|\d{3}-\d{3}-\d{4})/.test($("#sPhoneInput").val())){
             $("#sPhoneInput").css("border","2px red solid");
-            flag = true;
+            flag.push("Phone number is not real or not in a recognized format.");
         }
         if($("#compInput").val() == ""){
             $("#compInput").css("border","2px red solid");
-            flag = true;
+            flag.push("Company must be included.");
         }
         if($("#nameInput").val() == ""){
             $("#nameInput").css("border","2px red solid");
-            flag = true;
+            flag.push("Name is required.");
         }
         return flag;
     }

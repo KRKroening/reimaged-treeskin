@@ -1,5 +1,34 @@
 var Main = function(){
 
+    /*
+    TODO!!!!
+
+    Dockerize
+    Get redis
+
+    Add nodejs services
+        - Chron to check if things are needed. (Pentosan, farrier, teeth, vaccines, worming, ect)
+        - sends alert on website, plus to phone
+        - queue service to resolve alerts
+    Add login page
+        -user managment
+        - user account
+        - password hashing
+    add user to subject/provider schema
+    add provider/subject to user schema
+    Add tracking to service page. Like alerts.
+    Add downloads page to download records.
+    Ability to upload images.
+
+    ticket/suggestion submission.
+
+
+
+    */
+
+
+
+
     var main = {};
     var entryBoxHMTL = `<div id="viewEntryBox">
                 <i class="glyphicon glyphicon-remove" onclick="$('#viewEntryBox').remove()"></i>
@@ -40,11 +69,14 @@ var Main = function(){
     }
 
     var saveEnt = function(){
+        $("#errors").hide()
+        $("#errors").empty()
+
         var entryText = $("#entryInput").val();
         var date =$("#datepickerA")[0].value;
         var type = $("#subtype").text();
         var provider = $("#provDDNew").val();
-        var subject = $("#subjectContainer .selectedButton").text();
+        var subject = $("#subjectContainer .selectedButton")[0].dataset.id
         var collection = {
             entry: entryText,
             date : moment(date).unix().toString(),
@@ -52,21 +84,48 @@ var Main = function(){
             provider: provider,
             subject : subject
         }
-        if (validateEntry(collection)){
+        var validated = validateEntry()
+        if(validated.length > 1){
             saveEntry(collection);
-            location.reload();
         }
         else {
-            $("#errorAlert").text = "Please correct the form";
+            $("#errors").show() 
+                
+            $("#errors").append("Errors in submitting the Entry: \n")                
+            validated.forEach( v => {
+                $("#errors").append(v + "\n")
+            })
         }
     }
 
-    var validateEntry = function(collection){
-        if(collection.entry == "") return false;
-        if(collection.date == "") return false;
-        if(collection.type == "") return false;
-        if(collection.subject == "") return false;
-        else return true;
+    var validateEntry = function(){
+        $("#errors").empty()
+        _.each($("input"),function(i){
+            $(i).css("border","1px #ccc solid");
+        });
+        var flag = [];
+        if($("#entryInput").val() == ""){
+            $("#entryInput").css("border","2px red solid");
+            flag.push("Entry cannot be empty.")
+        }
+        if($("#datepickerA").val() == ""){
+            $("#datepickerA").css("border","2px red solid");
+            flag.push("Entry cannot be empty.")
+        }
+        if(moment($("#datepickerA").val()) > moment()){
+            $("#datepickerA").css("border","2px red solid");
+            flag.push("Entry cannot be dated before today.")
+        }
+        if($("#subtype")[0].textContent == ""){
+            $("#subtype").css("border","2px red solid");
+            flag.push("Type cannot be empty.")
+        }
+        if($("#provDDNew").val() == ""){
+            $("#provDDNew").css("border","2px red solid");
+            flag.push("Provider cannot be empty.")
+        }
+        return flag;
+
     }
 
     var searchEntries = function(){
@@ -77,7 +136,7 @@ var Main = function(){
         var type = $("#searchSubtype").text();
         var contains = $("#containsSearch").val();
         var provider = $("#provDDSearch").val();
-        var subject = $("#subjectContainer .selectedButton").text();
+        var subject = $("#subjectContainer .selectedButton")[0].dataset.id
         
         var collection = {
             dateFrom: moment(dateFrom).unix(),
@@ -101,11 +160,13 @@ var Main = function(){
     var revealNew = function(_this){
         $("#searchEntryContainer").hide();
         $("#newEntryContainer").show();
+        $(".typeSelection-parent").show();
     }
 
     var revealSearch = function(_this){
         $("#newEntryContainer").hide();
         $("#searchEntryContainer").show();
+        $(".typeSelection-parent").show();        
     }
 
     var populateEntrySearch = function(data){        
@@ -135,7 +196,7 @@ var Main = function(){
 
     var populateVisitType = function (data) {    
         _.each(data, function(r){
-            var objHTML = "<li class='leftTypeNav' href='#'>"+ r.name +"</li>"
+            var objHTML = "<li class='typeSelection' href='#'>"+ r.name +"</li>"
             $("#typesContainer").append(objHTML);
         });
         $("#typesContainer li").on('click', function(_this){
@@ -151,7 +212,7 @@ var Main = function(){
 
     var populateSubjectList = function (data) {        
         _.each(data, function(r){
-            var objHTML = "<li class='leftTypeNav' href='#'>"+ r.name +"</li>"
+            var objHTML = `<li class='leftTypeNav' href='#' data-id="${r.id}"> ${r.name}</li>`
             $("#subjectContainer").append(objHTML);
         });
         $("#subjectContainer li").on('click', function(_this){
@@ -160,6 +221,7 @@ var Main = function(){
             });
             $(_this.currentTarget).addClass("selectedButton");
             $("#optionsContainer").show();
+            $("#welcome-msg").hide();
             $("#nameWelcome").text(_this.currentTarget.innerHTML);
         });
     };
@@ -174,17 +236,11 @@ var Main = function(){
         flatpickr('#datepickerTo',{
             defaultDate : "today"
         });
-
-        // var button = document.getElementById("forClass");
-        // button.addEventListener("click",function(){
-        //     console.log("Alakazam.");
-        //     var div = document.getElementById("subjectContainer");
-        //     div.style.backgroundColor = "red";
-        // })
         
         $("#searchEntryContainer").hide();
         $("#newEntryContainer").hide();
         $("#optionsContainer").hide();
+        $(".typeSelection-parent").hide();
         
         if(document.getElementById("typesContainer")){
             $.when(getAllVisitTypes()).then(function(data){

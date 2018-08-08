@@ -4,12 +4,12 @@ var SubjectList = (function($, moment){
 
     var loadSubjectTable = function(data){
         _.each(data, function(d){
-            var html = `<tr><td data-id=`+ d._id +`>` + d.name +`</td>
-                    <td>` + (parseInt(moment().format('YYYY')) - d.age) +`</td>
+            var html = `<tr><td data-id=`+ d.id +`>` + d.name +`</td>
+                    <td>` + (parseInt(moment().format('YYYY')) - parseInt(moment(d.age).format('YYYY'))) +`</td>
                     <td>`+d.gender+`</td>
                     <td>`+d.breed+`</td>
                     <td>`+d.colour+`</td>
-                    <td><label class='iconHover' onclick='window.location.href = "subjects_edit.html?mode=`+d._id+`";'>Edit</label> | <label  class='iconHover' onclick="SubjectList.deleteSub(this)">Delete</label></td>
+                    <td><label class='iconHover' onclick='window.location.href = "subjects_edit.html?mode=`+d.id+`";'>Edit</label> | <label  class='iconHover' onclick="SubjectList.deleteSub(this)">Delete</label></td>
                     </tr>`;
             $("#subjectTableBody").append(html);
         });
@@ -23,8 +23,7 @@ var SubjectList = (function($, moment){
     }
 
 
-    var load = function(){
-        var test = $("#subjectTableBody");
+    var load = function(){        
         if(document.getElementById("subjectTable")){
             $.when(getAllSubjects()).then(function(data){
                 loadSubjectTable(data);
@@ -32,14 +31,9 @@ var SubjectList = (function($, moment){
         }
     }
 
-    var testMath = function(a,b,c){
-        return a+b+c;
-    }
-
-     return {
+    return {
          load : load,
          loadSubjectTable : loadSubjectTable,
-         testMath : testMath,
          deleteSub: deleteSub
      }
 })(jQuery, moment);

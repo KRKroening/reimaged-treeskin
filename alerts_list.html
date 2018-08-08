@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Treeskin</title>
+    <title>Alerts</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
@@ -30,8 +30,8 @@
     /* .navbar {
       margin-bottom: 0;
       border-radius: 0;
-    }
-     */
+    } */
+    
     /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
     .row.content {height: 450px}
     
@@ -39,14 +39,17 @@
     /* .sidenav {
       padding-top: 20px;
       background-color: #f1f1f1;
-      height: 120%;
-    } */
+      height: 100%;
+    }
     
     /* Set black background color, white text and some padding */
-    /* footer {
+    /*footer {
       background-color: #555;
       color: white;
       padding: 15px;
+      position: fixed;
+      bottom:0;
+      width: 75%;
     } */
     
     /* On small screens, set height to 'auto' for sidenav and grid */
@@ -57,43 +60,51 @@
       }
       .row.content {height:auto;} 
     }
+
+    select{
+      width: 20%!important;
+    }
   </style>
 </head>
 <body>
 
-<div id='placeholder'></div>
+  <div id='placeholder'></div>
   
 <div class="container-fluid text-center">    
   <div class="row content">
     <div  class="col-sm-2 sidenav-left">
     </div>
     <div class="col-sm-8 text-left main-content" style="left:16.5%;"> 
-        <ul  class="backToPage"> 
-            <li><a href="providers_list.html">Back to Provider List</a> </li>
-        </ul>
-        <h2> Create or Edit a Provider</h2>
-        <hr>
-        <p style="display:none" id="errors"></p>
-      <div class="formContainer"><label>Name: </label> <input class="form-control" type="text" id="nameInput"/></div>
-      <div class="formContainer"><label>Type: </label> 
-        <select class="form-control" type="text" id="typeInput">
-          <option value="Vet">Vet</option>
-          <option value="Farrier">Farrier</option>
-          <option value="Trainer">Trainer</option>
-          <option value="Alternative Therapist">Alternative Therapist</option>
-          <option value="Misc">Misc</option>          
-        </select>
-        </div>
-      <div class="formContainer"><label>Primary Phone: </label> <input class="form-control" type="text" id="pPhoneInput"/></div>
-      <div class="formContainer"><label>Secondary Phone: </label> <input class="form-control" type="text" id="sPhoneInput"/></div>
-      <div class="formContainer"><label>Clinic/Company: </label> <input class="form-control"type="text" id="compInput"/></div>
-        <div class="buttonContainer">
-            <button class="btn" id="clearBtn">Clear</button>
-            <button class="btn" id="saveBtn">Save</button>
-        </div>
+        
+      <h1>Alerts List</h1>
+      <hr>
+      <p>View, edit, or create new Content Alerts</p>
+      <button class="btn" style="margin: 20px 0;" onclick="window.location.href='alerts_edit.html?mode=new';">Add Alert</button>
+    </br>
+      <label>Filter by Individual</label>
+      <select class="form-control" id="filterByInv">
+        <option>None</option>          
+          <option>Julius</option>
+          <option>Scooter</option>   
+          <option>Buster</option>                           
+      </select>
+      <div >
+          <table class="table table-striped" id="alertTable">
+            <thead>
+                <th>Name</th>
+                <th>For</th>
+                <th>Active</th>
+                <th>Frequency</th>
+                <th>Next Date</th>
+                <th>Resolved</th>
+                <th>Actions</th>
+            </thead>
+            <tbody id="alertTableBody">
+            </tbody>
+          </table>
+      </div>
     </div>
-
-    <div id="categoryList" class="col-sm-2 sidenav-right">
+    <div id="subjectList" class="col-sm-2 sidenav-right">
     </div>
   </div>
 </div>
@@ -105,12 +116,10 @@
 
 </body>
   <script src="templating/header.js"></script>
-  <script src="src/api.js?q=126"></script>
-  <script src="src/provider_edit.js?q=126"></script>
+  <script src="src/api.js"></script>
+  <script src="src/alerts_list.js?q=125"></script>
   <script>
-    $(document).ready(function(){
-      ProviderEdit.load();
-    });
+    $(document).ready(AlertsList.load);
   </script>
 </html>
 

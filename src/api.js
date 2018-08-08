@@ -19,26 +19,20 @@ getAllVisitTypes = function(){
 // Subjects
 
 getAllSubjects = function(){
-    return callAPI(url+"Subjects/")
+    return callAPI(url+"Subject/")
 }
 
 getSubjectById = function(id){
-    return callAPI(url+"Subjects/" + id)    
+    return callAPI(url+"Subject/" + id)    
 }
 
 
 saveSubject = function(collection){
-    var strToSend= {"name" : collection.name,
-                    "age" : collection.age,
-                    "gender" : collection.gender,
-                    "breed" : collection.breed,
-                    "colour" : collection.colour
-                }
 
     $.ajax({
         method : 'POST',
-        url : url + "Subjects/",
-        data : strToSend,
+        url : url + "Subject/",
+        data : collection,
         success : function(data){
             location.href = "subjects_list.html";            
         },
@@ -57,7 +51,7 @@ updateSubject = function(id,collection){
                 }
     $.ajax({
         method : 'PUT',
-        url : url + "Subjects/" + id ,
+        url : url + "Subject/" + id ,
         data : strToSend,
         success : function(data){
             // console.log(data);
@@ -72,7 +66,7 @@ updateSubject = function(id,collection){
 deleteSubject = function(id){
     $.ajax({
         method : 'DELETE',
-        url : url + "Subjects/" + id,
+        url : url + "Subject/" + id,
         success : function(data){
             console.log(data);
         },
@@ -85,25 +79,18 @@ deleteSubject = function(id){
  ////// Providers /////
 
 getAllProviders = function(){
-    return callAPI(url+"Providers/")
+    return callAPI(url+"Provider/")
 }
 
 getAllProvidersById = function(id){
-    return callAPI(url + "Providers/" + id)
+    return callAPI(url + "Provider/" + id)
 }
 
 saveProvider = function(collection){
-    var strToSend= {"name" : collection.name,
-                    "type" : collection.type,
-                    "pPhone" : collection.pPhone,
-                    "sPhone" : collection.sPhone,
-                    "comp" : collection.comp
-                }
-
     $.ajax({
         method : 'POST',
-        url : url + "Providers",
-        data : strToSend,
+        url : url + "Provider",
+        data : collection,
         success : function(data){
             location.href = "providers_list.html";
         },
@@ -116,7 +103,7 @@ saveProvider = function(collection){
 deleteProvider = function(id){
     $.ajax({
         method : 'DELETE',
-        url : url + "Providers/" + id,
+        url : url + "Provider/" + id,
         success : function(data){
             console.log(data);
         },
@@ -135,7 +122,7 @@ updateProvider = function(id,collection){
                 }
     $.ajax({
         method : 'PUT',
-        url : url + "Providers/" + id ,
+        url : url + "Provider/" + id ,
         data : strToSend,
         success : function(data){
             // console.log(data);
@@ -158,7 +145,7 @@ saveEntry = function(collection){
                 }
     $.ajax({
         method : 'POST',
-        url : url + "Entrys/",
+        url : url + "entrye/",
         data: strToSend,        
         success : function(data){        
             location.href = "main.html";
@@ -178,13 +165,13 @@ getEntries = function(collection){
                     "&fromDate=" + collection.dateFrom +
                     "&type=" + collection.type +                    
                     "&toDate=" + collection.dateTo;
-    return callAPI(url+"entrys?"+strToSend)
+    return callAPI(url+"entry?"+strToSend)
 }
 
 updateEntry = function(id,collection){
     $.ajax({
         method : 'PUT',
-        url : url + "entrys/" + id,
+        url : url + "entry/" + id,
         data: collection,
         success : function(data){            
                 location.reload();
@@ -194,4 +181,17 @@ updateEntry = function(id,collection){
 
         }
     });
+}
+
+
+var resolveAlert = function(alert_id){
+    return callAPI(url+"alert/resolve/" + alert_id)
+}
+
+var api_saveAlert = function(alert){
+    console.log(alert)
+}
+
+var api_requestDownload = function(criteria){
+    console.table(criteria)
 }

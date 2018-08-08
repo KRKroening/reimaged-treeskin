@@ -66,34 +66,55 @@
 <div class="container-fluid text-center">    
   <div class="row content">
     <div  class="col-sm-2 sidenav-left">
+      <ul id="typesContainer">
+        <!--  -->
+      </ul>
     </div>
     <div class="col-sm-8 text-left main-content" style="left:16.5%;"> 
         <ul  class="backToPage"> 
-            <li><a href="providers_list.html">Back to Provider List</a> </li>
+            <li><a href="alerts_list.html">Back to Alert List</a> </li>
         </ul>
-        <h2> Create or Edit a Provider</h2>
+        <h2> Create or Edit an Alert</h2>
         <hr>
         <p style="display:none" id="errors"></p>
       <div class="formContainer"><label>Name: </label> <input class="form-control" type="text" id="nameInput"/></div>
-      <div class="formContainer"><label>Type: </label> 
-        <select class="form-control" type="text" id="typeInput">
-          <option value="Vet">Vet</option>
-          <option value="Farrier">Farrier</option>
-          <option value="Trainer">Trainer</option>
-          <option value="Alternative Therapist">Alternative Therapist</option>
-          <option value="Misc">Misc</option>          
+      <div class="formContainer"><label>For: </label> 
+        <select class="form-control" type="text" id="forInput">
+            <option value="">Select</option>                
         </select>
         </div>
-      <div class="formContainer"><label>Primary Phone: </label> <input class="form-control" type="text" id="pPhoneInput"/></div>
-      <div class="formContainer"><label>Secondary Phone: </label> <input class="form-control" type="text" id="sPhoneInput"/></div>
-      <div class="formContainer"><label>Clinic/Company: </label> <input class="form-control"type="text" id="compInput"/></div>
+      <div class="formContainer"><label>Active</label> <input class="form-control" type="checkbox" id="activeInput"/></div>
+      <div class="formContainer"><label>Frequency: </label> 
+        <select class="form-control" type="text" id="frequencyInput">
+            <option value="">Select</option>            
+            <option value="0">No Repeat</option>            
+            <option value="24">Daily</option>
+            <option value="48">Every 2 days</option>
+            <option value="72">Every 3 days</option>
+            <option value="168">Weekly</option>
+            <option value="336">Bi-weekly</option>
+            <option value="720">Monthly</option>
+            <option value="1440">Bi-Monthly</option>
+            <option value="4320">Semi-Annual</option>
+            <option value="8760">Annual</option>    
+            <option value="-1">Custom</option>                          
+          </select>
+          <div id="customFrequencyContainer">Repeat every <input type="number" id="customValue">
+                <select class="form-control" type="text" id="customInput">
+                    <option value="d">Days</option>
+                    <option value="w">Weeks</option>
+                    <option value="m">Months</option>
+                    <option value="y">Years</option>                    
+                </select>
+            </div>
+        </div>
+      <div class="formContainer"><label>Start from: </label> <input class="form-control" type="text" id="startFromDate"></div>
         <div class="buttonContainer">
             <button class="btn" id="clearBtn">Clear</button>
             <button class="btn" id="saveBtn">Save</button>
         </div>
     </div>
-
-    <div id="categoryList" class="col-sm-2 sidenav-right">
+    <div id="subjectList" class="col-sm-2 sidenav-right">
     </div>
   </div>
 </div>
@@ -105,11 +126,11 @@
 
 </body>
   <script src="templating/header.js"></script>
-  <script src="src/api.js?q=126"></script>
-  <script src="src/provider_edit.js?q=126"></script>
+  <script src="src/api.js"></script>
+  <script src="src/alerts_edit.js?q=126"></script>
   <script>
     $(document).ready(function(){
-      ProviderEdit.load();
+      AlertsEdit.load();
     });
   </script>
 </html>

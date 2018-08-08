@@ -16,7 +16,7 @@ var SubjectEdit = function(){
     }
 
     var loadToForm = function(data){
-        // var jsData = JSON.parse(data)[0];
+        data = data[0]
         $("#nameInput").val(data.name);
         $("#ageInput").val(data.age);
         $("#genderInput").val(data.gender);
@@ -35,7 +35,8 @@ var SubjectEdit = function(){
     }
 
     var saveForm = function(){
-        if(!validateForm()){
+        var validated = validateForm()
+        if(validated.length < 1){
             var age = $("#ageInput").val();
             var gender = $("#genderInput").val();
             var breed = $("#breedInput").val();
@@ -54,45 +55,63 @@ var SubjectEdit = function(){
             {
                 updateSubject(id,collection);
             } else {
+                collection.id = "S" + Math.random().toString(36).replace(/\./g,"a");
                 saveSubject(collection);
             }
         }
         else {
-            $("p").text = "Please correct these errors.";
+            $("#errors").show() 
+                
+            $("#errors").append("Errors in submitting the Subject: \n")                
+            validated.forEach( v => {
+                $("#errors").append(v + "\n")
+            })
         }
     }
 
-    var validateForm = function()
-    {
+    var validateForm = function(){
+        $("#errors").empty()
         _.each($("input"),function(i){
             $(i).css("border","1px #ccc solid");
         });
-        var flag = false;
+        var flag = [];
         if($("#ageInput").val() == ""){
             $("#ageInput").css("border","2px red solid");
-            flag = true;
+            flag.push("Age is required.");
+        }
+        if(!moment($("#ageInput").val()).isValid()){
+            $("#ageInput").css("border","2px red solid");
+            flag.push("Age must be a date.");
+        }
+        if(moment($("#ageInput").val()) > moment()){
+            $("#ageInput").css("border","2px red solid");
+            flag.push("Age cannot be before today.");
         }
         if($("#genderInput").val() == ""){
             $("#genderInput").css("border","2px red solid");
-            flag = true;
+            flag.push("Gender is required.");
         }
         if($("#breedInput").val() == ""){
             $("#breedInput").css("border","2px red solid");
-            flag = true;
+            flag.push("Breed is required.");
         }
         if($("#colourInput").val() == ""){
             $("#colourInput").css("border","2px red solid");
-            flag = true;
+            flag.push("Colour is required.");
         }
         if($("#nameInput").val() == ""){
             $("#nameInput").css("border","2px red solid");
-            flag = true;
+            flag.push("Name is required.");
         }
         return flag;
     }
 
 
     var load = function(){
+        $("#errors").hide()   
+        flatpickr('#ageInput',{
+            defaultDate : "today"
+        });
         id = getQueryVariable("mode");
         if(id != "new")
             {
