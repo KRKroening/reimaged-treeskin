@@ -1,4 +1,4 @@
-var AlertsList = (function(){
+var AlertsList = (function () {
 
     var alertsList = {}
 
@@ -7,18 +7,18 @@ var AlertsList = (function(){
     var checkmark = "O"
     var crossout = "X"
 
-    var filterTable = function(name){
+    var filterTable = function (name) {
         var targetTable = $("#alertTableBody");
         Array.from(targetTable[0].children).forEach(tr => {
             $(tr).show();
-            if(name !== "None" && tr.children[1].textContent !== name){
+            if (name !== "None" && tr.children[1].textContent !== name) {
                 $(tr).hide();
             }
         })
     }
 
-    var displayFrequency = function(hours){
-        switch(hours){
+    var displayFrequency = function (hours) {
+        switch (hours) {
             case 0:
                 return "No Repeat";
                 break;
@@ -49,7 +49,7 @@ var AlertsList = (function(){
             case 8760:
                 return "Annual";
                 break;
-            default :
+            default:
                 // 11 days
                 // {
                 //     hours : 264
@@ -60,7 +60,7 @@ var AlertsList = (function(){
                 var calcedNum;
                 var denom;
 
-                switch(hours.denom){
+                switch (hours.denom) {
                     case "y":
                         calcedNum = numOfHours / 8760;
                         denom = "Years";
@@ -76,26 +76,26 @@ var AlertsList = (function(){
                     default:
                         calcedNum = numOfHours / 24;
                         denom = "Days";
-                        break;                    
+                        break;
                 }
 
                 return `${calcedNum} ${denom}`;
-                
+
 
                 break;
-            
+
         }
     }
 
-    var markAsResolved = function(alert_id){
+    var markAsResolved = function (alert_id) {
         resolveAlert(alert_id);
         console.log(alert_id)
     }
 
-    var loadAlertsTable = function(data){
+    var loadAlertsTable = function (data) {
         var data = [
             {
-                id:123,
+                id: 123,
                 name: "Testing",
                 for: "Scooter",
                 active: true,
@@ -107,8 +107,8 @@ var AlertsList = (function(){
                 resolved: true
             },
             {
-                id:345,
-                name: "Another test", 
+                id: 345,
+                name: "Another test",
                 for: "Buster",
                 active: true,
                 frequency: 720,
@@ -116,7 +116,7 @@ var AlertsList = (function(){
                 resolved: false
             }
         ]
-        _.each(data, function(d){
+        _.each(data, function (d) {
             var html = `<tr class="${d.resolved ? "" : "ResolvedWarning\" title=\"Alarm has been triggered but not recorded as resolved."}"><td data-id=${d.id}>${d.name}</td>
                     <td>${d.for}</td>
                     <td>${d.active ? checkmark : crossout}</td>
@@ -129,23 +129,28 @@ var AlertsList = (function(){
         });
     }
 
-    var load = function(){
-        $("#filterByInv").on("change", e => {
-            const value = e.currentTarget.selectedOptions[0].textContent;
-            filterTable(value);
-        })
+    var load = function () {
+        USER_SESSION = GET_USER_SESSION();
+        if (!USER_SESSION) location.href = "./account/login.html";
+        else {
+            $("body").show();
+            $("#filterByInv").on("change", e => {
+                const value = e.currentTarget.selectedOptions[0].textContent;
+                filterTable(value);
+            })
 
-        loadAlertsTable()
-        // if(document.getElementById("alertTable")){
-        //     $.when(getAllAlerts()).then(function(data){
-        //         loadAlertsTable(data);
-        //     });
-        // }
+            loadAlertsTable()
+            // if(document.getElementById("alertTable")){
+            //     $.when(getAllAlerts()).then(function(data){
+            //         loadAlertsTable(data);
+            //     });
+            // }
+        }
     }
 
     return {
-        load : load,
-        markAsResolved : markAsResolved
+        load: load,
+        markAsResolved: markAsResolved
     }
 
 })(jQuery, moment);

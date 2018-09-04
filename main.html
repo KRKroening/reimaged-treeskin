@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>Treeskin</title>
   <meta charset="utf-8">
@@ -18,20 +19,25 @@
   <script src="node_modules/flatpickr/dist/flatpickr.js"></script>
   <script src="node_modules/moment/moment.js"></script>
   <link rel="stylesheet" href="node_modules/flatpickr/dist/flatpickr.css">
-  
+
 
   <style>
-    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    /* Remove the navbar's default margin-bottom and rounded borders */
+
     /* .navbar {
       margin-bottom: 0;
       border-radius: 0;
       z-index: 9999;
     } */
-    
+
     /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-    .row.content {height: 450px}
-    
+
+    .row.content {
+      height: 450px
+    }
+
     /* Set gray background color and 100% height */
+
     /* .sidenav-left {
       padding-top: 60px;
       background-color: #f1f1f1;
@@ -53,6 +59,7 @@
     }
     
     /* Set black background color, white text and some padding */
+
     /*footer {
       background-color: #555;
       color: white;
@@ -61,130 +68,150 @@
       width: 100%;
       bottom: 0;
     } */
-    
+
     /* On small screens, set height to 'auto' for sidenav and grid */
+
     @media screen and (max-width: 767px) {
       .sidenav {
         height: auto;
         padding: 15px;
       }
-      .row.content {height:auto;} 
+      .row.content {
+        height: auto;
+      }
+      body {
+        display: none;
+      }
     }
   </style>
 </head>
-<body>
+
+<body style="display:none;">
   <div id='placeholder'></div>
-  
-<div class="container-fluid text-center">    
-  <div class="row content">
-    <div id="subjectList" class="col-sm-2 sidenav-left">
-      <ul id="subjectContainer">
-        <!-- <li class='leftTypeNav' href='#'>Scooter</li>
+
+  <div class="container-fluid text-center">
+    <div class="row content">
+      <div id="subjectList" class="col-sm-2 sidenav-left">
+        <ul id="subjectContainer">
+          <!-- <li class='leftTypeNav' href='#'>Scooter</li>
         <li class='leftTypeNav' href='#'>Julius</li>
         <li class='leftTypeNav' href='#'>Skitty</li>
         <li class='leftTypeNav' href='#'>Boo</li>
         <li class='leftTypeNav' href='#'>Browner</li>       -->
-      </ul>
-    </div>
-    <div class="col-sm-8 text-left main-container"> 
-      <h1>Entry Log</h1>
-      <!-- <button id="forClass">Push </button> -->
-      <hr>
-      <p style="display:none" id="errors"></p>
-      <div id="mainContentContainer">
-        <p id="errorAlert"></p>
-        <p id="welcome-msg">Select a herd member from the list to record an entry.</p>
-        <div id="optionsContainer">
-          <h3 id="nameWelcome">Test</h3>
-          <div class="btn-group" role="group" aria-label="...">
-            <button type="button" class="btn btn-default" onclick="Main.revealNew()">New</button>
-            <button type="button" class="btn btn-default" onclick="Main.revealSearch()">Search</button>
-          </div>
-          <div  class="col-sm-2 typeSelection-parent">
-            <ul id="typesContainer">
-              <li class='typeSelection' href='#'>Trainer</li>
-              <li class='typeSelection' href='#'>Vet</li>
-              <li class='typeSelection' href='#'>Alternative</li>
-              <li class='typeSelection' href='#'>Farrier</li>
-              <li class='typeSelection' href='#'>Self</li>
-            </ul>
-          </div>
-        </div>
-
-        
-        <div id="searchEntryContainer">
-          <div>
-            <p>From date: <input class="form-control" type="text" id="datepickerFrom"></p>
-            <p>To date: <input class="form-control" type="text" id="datepickerTo"></p>
-          </div>
-          <div>
-            <p>Type: <label class="form-control" id="searchSubtype"></label></p>
-            <p>Contains: <input class="form-control" type="text" id="containsSearch"></p>
-          </div>
-          <div>
-          <p>Provider: 
-            <select class="form-control" id="provDDSearch">          
-            </select></p>
+        </ul>
+      </div>
+      <div class="col-sm-8 text-left main-container">
+        <h1>Entry Log</h1>
+        <!-- <button id="forClass">Push </button> -->
+        <hr>
+        <p style="display:none" id="errors"></p>
+        <div id="mainContentContainer">
+          <p id="errorAlert"></p>
+          <p id="welcome-msg">Select a herd member from the list to record an entry.</p>
+          <div id="optionsContainer">
+            <h3 id="nameWelcome">Test</h3>
+            <div class="btn-group" role="group" aria-label="...">
+              <button type="button" class="btn btn-default" onclick="Main.revealNew()">New</button>
+              <button type="button" class="btn btn-default" onclick="Main.revealSearch()">Search</button>
+            </div>
+            <div class="col-sm-2 typeSelection-parent">
+              <ul id="typesContainer">
+                <li class='typeSelection' href='#'>Trainer</li>
+                <li class='typeSelection' href='#'>Vet</li>
+                <li class='typeSelection' href='#'>Alternative</li>
+                <li class='typeSelection' href='#'>Farrier</li>
+                <li class='typeSelection' href='#'>Self</li>
+              </ul>
+            </div>
           </div>
 
-          <button class="btn" type="button" onclick="Main.searchEntries()">Search</button>
 
-          <table class="table stable-striped">
-            <thead>
-              <th>Date</th>
-              <th>Provider</th>
-              <th>Entry</th>
-              <th>Action</th>
-            </thead>
-            <tbody>
-            </tbody>
-          </table>
+          <div id="searchEntryContainer">
+            <div>
+              <p>From date:
+                <input class="form-control" type="text" id="datepickerFrom">
+              </p>
+              <p>To date:
+                <input class="form-control" type="text" id="datepickerTo">
+              </p>
+            </div>
+            <div>
+              <p>Type:
+                <label class="form-control" id="searchSubtype"></label>
+              </p>
+              <p>Contains:
+                <input class="form-control" type="text" id="containsSearch">
+              </p>
+            </div>
+            <div>
+              <p>Provider:
+                <select class="form-control" id="provDDSearch">
+                </select>
+              </p>
+            </div>
 
-          <!-- <div id="viewEntryBox">
+            <button class="btn" type="button" onclick="Main.searchEntries()">Search</button>
+
+            <table class="table stable-striped">
+              <thead>
+                <th>Date</th>
+                <th>Provider</th>
+                <th>Entry</th>
+                <th>Action</th>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+
+            <!-- <div id="viewEntryBox">
             <i class="glyphicon glyphicon-remove" onclick="$('#viewEntryBox').remove()">
             <textarea id="entryUpdate"/>
             <button type="button" onclick="updateEnt()">Update</button>
           </div> -->
 
-          
-        </div>
-        <div id="newEntryContainer">
-          <p>Date: <input class="form-control" type="text" id="datepickerA"></p>
-          <p>Type: <label class="form-control" id="subtype"></label></p>
-          <p>Provider
-          <select class="form-control" id="provDDNew">
-              <option id="any">...</option>
-          </select></p>
-          <textarea id="entryInput" class="form-control textBoxEntry" disabled></textarea>
-          <div class="buttonContainer" role="group" aria-label="...">
-            <button type="button" class="btn btn-default" onclick="Main.saveEnt()">Save</button>
-            <button type="button" class="btn btn-default" onclick="Main.clearEntry()">Clear</button>
+
+          </div>
+          <div id="newEntryContainer">
+            <p>Date:
+              <input class="form-control" type="text" id="datepickerA">
+            </p>
+            <p>Type:
+              <label class="form-control" id="subtype"></label>
+            </p>
+            <p>Provider
+              <select class="form-control" id="provDDNew">
+                <option id="any">...</option>
+              </select>
+            </p>
+            <textarea id="entryInput" class="form-control textBoxEntry" disabled></textarea>
+            <div class="buttonContainer" role="group" aria-label="...">
+              <button type="button" class="btn btn-default" onclick="Main.saveEnt()">Save</button>
+              <button type="button" class="btn btn-default" onclick="Main.clearEntry()">Clear</button>
+            </div>
           </div>
         </div>
-      </div>
 
-    </div>    
-    <div id="subjectList" class="col-sm-2 sidenav-right">
+      </div>
+      <div id="subjectList" class="col-sm-2 sidenav-right">
+      </div>
     </div>
   </div>
-</div>
 
-<footer class="container-fluid text-center">
-  <p>Footer Text</p>
-</footer>
+  <footer class="container-fluid text-center">
+    <p>Footer Text</p>
+  </footer>
 
 
 </body>
-  <script src="templating/header.js"></script>
-  <script src="src/api.js?a=182"></script>
-  <script src="src/main.js?a=118"></script>
-  
-  <script>
-    $(document).ready(function(){
+<script src="templating/header.js"></script>
+<script src="src/api.js?a=182"></script>
+<script src="src/main.js?a=118"></script>
 
-      Main.load();
-    });
-  </script>
+<script>
+  $(document).ready(function () {
+
+    Main.load();
+  });
+</script>
+
 </html>
-
-
