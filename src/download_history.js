@@ -23,12 +23,31 @@ var DownloadHistory = (function ($, moment) {
         return errorList;
     }
 
+    function loadProviderDropdown(){
+        $.when(getProvidersForUser(USER_SESSION.id)).then(function (data) {
+            data.forEach(function(d){
+                $("#forProviders").append("<option value='" + d.id + "'>" + d.name + "</option>")
+            })
+        });
+    }
+
+    function loadPSubjectDropdown(){
+        $.when(getSubjectForUser(USER_SESSION.subjects)).then(function (data) {
+            data.forEach(function(d){
+                $("#forSubjects").append("<option value='" + d.id + "'>" + d.name + "</option>")
+            })
+        });
+    }
+
 
     var load = function () {
         USER_SESSION = GET_USER_SESSION();
         if (!USER_SESSION) location.href = "./account/login.html";
         else {
             $("body").show();
+
+            loadProviderDropdown();
+            loadPSubjectDropdown();
             flatpickr('#datepickerFrom', {
                 defaultDate: new Date(new Date().setDate(new Date().getDate() - 30))
             });

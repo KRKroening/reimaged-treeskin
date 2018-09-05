@@ -26,7 +26,7 @@ var ProviderList = function () {
         else {
             $("body").show();
             if (document.getElementById("providerTable")) {
-                $.when(getAllProviders()).then(function (data) {
+                $.when(getProvidersForUser(USER_SESSION.id)).then(function (data) {
                     loadProviderTable(data)
                 });
             }

@@ -2,10 +2,17 @@ var AlertsList = (function () {
 
     var alertsList = {}
 
-    // var checkmark = "<i class='glyphicon glyphicon-trash'></i>"
-    // var crossout = "<i class='glyphicon glyphicon-arrow'></i>"   
-    var checkmark = "O"
-    var crossout = "X"
+    var active = "<i class='glyphicon glyphicon-asterisk' style='color:green;font-size:40px;'></i>"
+    var disabled = "<i class='glyphicon glyphicon-asterisk' style='color:orange;font-size:40px;'></i>"
+
+    var unresolved = "<i class='glyphicon glyphicon-fire ' style='color:red;font-size:40px;'></i>"
+    var resolved = "<i class='glyphicon glyphicon-ok-sign' style='color:green;font-size:40px;'></i>"
+    
+
+    var subjects;
+
+    // var checkmark = "O"
+    // var crossout = "X"
 
     var filterTable = function (name) {
         var targetTable = $("#alertTableBody");
@@ -80,10 +87,6 @@ var AlertsList = (function () {
                 }
 
                 return `${calcedNum} ${denom}`;
-
-
-                break;
-
         }
     }
 
@@ -93,36 +96,18 @@ var AlertsList = (function () {
     }
 
     var loadAlertsTable = function (data) {
-        var data = [
-            {
-                id: 123,
-                name: "Testing",
-                for: "Scooter",
-                active: true,
-                frequency: {
-                    hours: 2880,
-                    denom: "m"
-                },
-                trigger_date: moment().format("YYYY-MM-DD"),
-                resolved: true
-            },
-            {
-                id: 345,
-                name: "Another test",
-                for: "Buster",
-                active: true,
-                frequency: 720,
-                trigger_date: moment().format("YYYY-MM-DD"),
-                resolved: false
-            }
-        ]
         _.each(data, function (d) {
-            var html = `<tr class="${d.resolved ? "" : "ResolvedWarning\" title=\"Alarm has been triggered but not recorded as resolved."}"><td data-id=${d.id}>${d.name}</td>
-                    <td>${d.for}</td>
-                    <td>${d.active ? checkmark : crossout}</td>
+            var sub = subjects.filter(function(s){
+                if(s.id == d.subject_id)
+                    return s
+            })[0]
+
+            var html = `<tr class="${d.resolved ? "" : "ResolvedWarning\" title=\"Alarm has been triggered but not recorded as resolved."}"><td data-id=${d.id}>${d.name}</td>       
+                    <td>${sub.name}</td>
+                    <td>${d.active ? active : disabled}</td>
                     <td>${displayFrequency(d.frequency)}</td>
                     <td>${d.trigger_date}</td>
-                    <td>${d.resolved ? checkmark : crossout}</td>
+                    <td>${d.resolved ? resolved : unresolved}</td>
                     <td><label class='iconHover' onclick='window.location.href = "alerts_edit.html?mode=${d.id}";'>Edit</label> | <label class='iconHover' onclick='markAsResolved(${d.id})";'>Resolve</label>  | <label  class='iconHover' onclick="AlertsList.deleteAlert(${d.id})">Delete</label></td>
                     </tr>`;
             $("#alertTableBody").append(html);
@@ -134,17 +119,24 @@ var AlertsList = (function () {
         if (!USER_SESSION) location.href = "./account/login.html";
         else {
             $("body").show();
+
+            $.when(getSubjectForUser(USER_SESSION.subjects)).then(function (data) {
+                subjects = data
+                data.forEach(function (d) {
+                    $("#filterByInv").append("<option value='" + d.id + "'>" + d.name + "</option>");
+                })
+                if (document.getElementById("alertTable")) {
+                    $.when(api_getAlertByUser(USER_SESSION.id)).then(function (data) {
+                        loadAlertsTable(data);
+                    });
+                }
+            })
+
             $("#filterByInv").on("change", e => {
                 const value = e.currentTarget.selectedOptions[0].textContent;
                 filterTable(value);
             })
 
-            loadAlertsTable()
-            // if(document.getElementById("alertTable")){
-            //     $.when(getAllAlerts()).then(function(data){
-            //         loadAlertsTable(data);
-            //     });
-            // }
         }
     }
 

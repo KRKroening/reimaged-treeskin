@@ -263,9 +263,9 @@ var Main = function () {
                     populateSubjectList(data)
                 })
             }
-            $.when(getAllProviders()).then(function (data) {
+            $.when(getProvidersForUser(USER_SESSION.id)).then(function (data) {
                 populateProviderDD(data)
-            })
+            });
         }
     };
 

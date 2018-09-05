@@ -83,9 +83,10 @@ var AlertsEdit = (function () {
     var gatherCollectionFromPage = function () {
         var collection = {};
         collection.name = $("#nameInput").val();
-        collection.for = $("#forInput")[0].selectedOptions[0].value;
+        collection.subject_id = $("#subjectDD")[0].selectedOptions[0].value;
         collection.active = $("#activeInput").val();
         collection.trigger_date = $("#startFromDate").val();
+        collection.user_id = USER_SESSION.id;
 
         if ($("#frequencyInput")[0].selectedOptions[0].value === "-1") { //if custom
             var dateValue = $("#customValue").val();
@@ -99,7 +100,7 @@ var AlertsEdit = (function () {
             collection.frequency = $("#frequencyInput")[0].selectedOptions[0].value;
         }
 
-        if (id) collection.id = id;
+        if (id != "new") collection.id = id;
         return collection;
     }
 
@@ -112,6 +113,13 @@ var AlertsEdit = (function () {
 
             flatpickr('#startFromDate', {
                 defaultDate: "today"
+            });
+
+            
+            $.when(getSubjectForUser(USER_SESSION.subjects)).then(function (data) {
+                data.forEach(function(d){
+                    $("#subjectDD").append("<option value='"+ d.id + "'>"+ d.name +"</option>")
+                });
             });
 
             $("#customFrequencyContainer").hide();
@@ -127,9 +135,9 @@ var AlertsEdit = (function () {
             id = getQueryVariable("mode");
             if (id != "new") {
                 $("#nameInput").prop("disabled", true);
-                $.when(getAllProvidersById(provid)).then(function (data) {
-                    loadToForm(data)
-                });
+                $.when(api_getAlertbyId(id)).then(function(res){
+                    loadToForm(res);
+                })
             }
 
             $("#clearBtn").on("click", function () {

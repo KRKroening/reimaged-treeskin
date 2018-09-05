@@ -107,6 +107,10 @@ getAllProvidersById = function(id){
     return callAPI(url + "provider/" + id)
 }
 
+getProvidersForUser = function(user){
+    return callAPI(url + "provider/user/" + user);
+}
+
 saveProvider = function(collection){
     $.ajax({
         method : 'POST',
@@ -209,8 +213,41 @@ var resolveAlert = function(alert_id){
     return callAPI(url+"alert/resolve/" + alert_id)
 }
 
-var api_saveAlert = function(alert){
-    console.log(alert)
+var api_getAlertById = function(id){
+    return callAPI(url + "alert/" + id);
+}
+
+var api_getAlertByUser = function(user){
+    return callAPI(url + "alert/user/" + user);
+}
+
+var api_saveAlert = function(collection){
+        $.ajax({
+        method : 'POST',
+        url : url + "alert",
+        data : collection,
+        success : function(data){
+            location.href = "alerts_list.html";
+        },
+        fail : function (){
+            console.log("error occred");
+        }
+    });
+}
+
+api_updateAlert = function(id,collection){
+    $.ajax({
+        method : 'PUT',
+        url : url + "alert/" + id,
+        data: collection,
+        success : function(data){            
+            location.reload();
+        },
+        fail : function (){
+            console.log("error occred");
+
+        }
+    });
 }
 
 var api_requestDownload = function(criteria){

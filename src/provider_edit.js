@@ -59,7 +59,8 @@ var ProviderEdit = function () {
                 type: type,
                 pPhone: pPhone,
                 sPhone: sPhone,
-                comp: comp
+                comp: comp,
+                user_id : USER_SESSION.id
             }
             if ($("#nameInput").prop("disabled")) {
                 updateProvider(provid, collection);

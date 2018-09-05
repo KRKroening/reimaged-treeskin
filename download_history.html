@@ -98,10 +98,8 @@
         <p style="display:none" id="errors"></p>
 
         <label>Select Herd Member:</label>
-        <select class="form-control" type="text" id="forInput">
+        <select id="forSubjects" class="form-control" type="text" id="forInput">
           <option value="">Select</option>
-          <option value="scooter">Scooter</option>
-          <option value="julius">Julius</option>
         </select>
 
         <label>From date: </label>
@@ -111,11 +109,8 @@
         <input class="form-control" type="text" id="datepickerTo">
 
         <label>Provider: </label>
-        <select class="form-control" id="provDDSearch">
-          <option id="any">Any</option>
-          <option id="any">Vet 1</option>
-          <option id="any">Vet 2</option>
-          <option id="any">Trainer 1</option>
+        <select id="forProviders" class="form-control" id="provDDSearch">
+            <option value="">Select</option>          
         </select>
 
         <button id="download" class="btn">Download</button>
