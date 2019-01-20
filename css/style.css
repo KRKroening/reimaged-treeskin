@@ -1,12 +1,24 @@
+
 body{
     display: none;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .navbar {
     margin-bottom: 0;
     border-radius: 0;
     z-index: 9999;
-    }
+    position: fixed;
+    width: 100%
+}
+
+.content{
+    margin-top:50px;
+}
+
+div.container-fluid:nth-child(2){
+    min-height:100vh;
+}
 
 .sidenav-left {
     padding-top: 60px;
@@ -33,9 +45,9 @@ body{
     background-color: #555;
     color: white;
     padding: 15px;
-    position: relative;
     width: 100%;
     bottom: 0;
+    margin-top: 10px;
   }
 
 /*  */
@@ -100,7 +112,7 @@ body{
 
 .buttonContainer {
     margin: 0 auto;
-    width: 122px;
+    width: 150px;
 
 }
 
@@ -164,15 +176,13 @@ i:hover{
     border: 1px solid gray;
     background-color: #ececec;
     margin: 0 0 15px 10px;
-    width: 100%;
+    width: 100%!important;
 }
 
 .main-container{
     width: 65%;
     margin: 0 auto;
-    position: relative;
-    left: 16%;
-    margin: 15px;
+    margin-left: 18%;
 }
 
 .main-container h1{
@@ -208,7 +218,8 @@ i:hover{
 
 #welcome-msg{
     margin: 0 auto;
-    width: 340px;
+    width: 400px;
+    text-align: center
 }
 
 #customFrequencyContainer{
@@ -262,4 +273,17 @@ i:hover{
     background-color: firebrick;
     border-radius: 4px;
     color: floralwhite; 
+}
+
+.changepwd label{
+    display: block;
+    width: 200px;
+}
+
+.changepwd{
+    margin-top: 30px;
+}
+
+.btn-group{
+    width : 300px;
 }

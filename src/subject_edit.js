@@ -56,6 +56,7 @@ var SubjectEdit = function () {
                 collection.id = "S" + Math.random().toString(36).replace(/\./g, "a");
                 collection.user = USER_SESSION.id;
                 saveSubject(collection);
+                SET_USER_SESSION()
             }
         }
         else {

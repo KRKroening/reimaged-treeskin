@@ -1,3 +1,9 @@
+
+body{
+
+}
+
+
 form{
     margin: 0 auto;
     width: 300px;
@@ -9,7 +15,7 @@ form{
 
 /*//////////////////////////////////////////////////////////////////
 [ FONT ]*/
-
+/* 
 @font-face {
     font-family: SourceSansPro-Regular;
     src: url('../fonts/source-sans-pro/SourceSansPro-Regular.ttf'); 
@@ -28,7 +34,7 @@ form{
   @font-face {
     font-family: JosefinSans-Bold;
     src: url('../fonts/JosefinSans/JosefinSans-Bold.ttf'); 
-  }
+  } */
   
   /*//////////////////////////////////////////////////////////////////
   [ RESTYLE TAG ]*/
@@ -41,12 +47,11 @@ form{
   
   body, html {
       height: 100%;
-      font-family: SourceSansPro-Regular, sans-serif;
+      font-family: 'Montserrat', sans-serif;
   }
   
   /*---------------------------------------------*/
   a {
-      font-family: SourceSansPro-Regular;
       font-size: 14px;
       line-height: 1.7;
       color: #666666;
@@ -71,7 +76,6 @@ form{
   }
   
   p {
-      font-family: SourceSansPro-Regular;
       font-size: 14px;
       line-height: 1.7;
       color: #666666;
@@ -129,14 +133,12 @@ form{
   /*//////////////////////////////////////////////////////////////////
   [ Utility ]*/
   .txt1 {
-    font-family: SourceSansPro-Regular;
     font-size: 16px;
     line-height: 1.4;
     color: #999999;
   }
   
   .txt2 {
-    font-family: SourceSansPro-Regular;
     font-size: 16px;
     line-height: 1.4;
     color: #4b2354;
@@ -216,7 +218,6 @@ form{
   
   .login100-form-title {
     display: block;
-    font-family: SourceSansPro-Bold;
     font-size: 30px;
     color: #4b2354;
     line-height: 1.2;
@@ -234,7 +235,6 @@ form{
   }
   
   .input100 {
-    font-family: SourceSansPro-Bold;
     font-size: 16px;
     color: #4b2354;
     line-height: 1.2;
@@ -306,7 +306,6 @@ form{
     background-color: rgba(24, 129, 182, 0.664);
     border-radius: 25px;
   
-    font-family: SourceSansPro-SemiBold;
     font-size: 14px;
     color: #fff;
     line-height: 1.2;
@@ -367,14 +366,14 @@ form{
     padding: 0 45px 0 22px;
     pointer-events: none;
   
-    font-family: SourceSansPro-Bold;
+    
     font-size: 16px;
     color: #fa4251;
     line-height: 1.2;
   }
   
   .btn-hide-validate {
-    font-family: Material-Design-Iconic-Font;
+    
     font-size: 15px;
     color: #fa4251;
     cursor: pointer;
@@ -397,7 +396,7 @@ form{
   
   .true-validate::after {
     content: "\f269";
-    font-family: Material-Design-Iconic-Font;
+    
     font-size: 15px;
     color: #57b846;
     display: -webkit-box;

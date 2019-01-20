@@ -23,6 +23,7 @@ var SubjectList = (function ($, moment) {
     var deleteSub = function (i) {
         var id = $(i).parent().parent().children()[0].dataset["id"];
         deleteSubject(id);
+        SET_USER_SESSION()
         location.reload();
     }
 

@@ -85,7 +85,7 @@ var Main = function () {
             subject: subject
         }
         var validated = validateEntry()
-        if (validated.length > 1) {
+        if (validated.length === 0) {
             saveEntry(collection);
         }
         else {
@@ -170,6 +170,12 @@ var Main = function () {
     }
 
     var populateEntrySearch = function (data) {
+        data = data.sort(function(a, b) {
+            a = new Date(a.date);
+            b = new Date(b.date);
+            return a<b ? -1 : a>b ? 1 : 0;
+        });
+        
         _.each(data, function (d) {
             var row = `<tr>
                             <td data-id=`+ d._id + `>` + moment(d.date).format("DD/MM/YYYY") + `</td>
@@ -182,6 +188,10 @@ var Main = function () {
     }
 
     var populateProviderDD = function (data) {
+        $('#provDDSearch').append($('<option>', {
+            value: "Any",
+            text: "Any"
+        }));
         _.each(data, function (d) {
             $('#provDDSearch').append($('<option>', {
                 value: d.name,

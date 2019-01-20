@@ -12,8 +12,8 @@ var Login = function(){
         });
     }
 
-    var verfiyLogin = function(){
-        event.preventDefault();
+    var verfiyLogin = function(e){
+        e.preventDefault();
 
         var name = $("input[name='username']").val();
         var pass = $("input[name='pass']").val();

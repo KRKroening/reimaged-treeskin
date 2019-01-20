@@ -208,6 +208,10 @@ updateEntry = function(id,collection){
     });
 }
 
+var getUnresolvedAlertsForUser = function(user_id){
+    return callAPI(url+"alert/user/unresolved/" + user_id);
+    
+}
 
 var resolveAlert = function(alert_id){
     return callAPI(url+"alert/resolve/" + alert_id)
@@ -251,7 +255,18 @@ api_updateAlert = function(id,collection){
 }
 
 var api_requestDownload = function(criteria){
-    console.table(criteria)
+    return new Promise(function(reject, resolve){
+        $.ajax({
+            method : 'GET',
+            url : url+"entry/download",
+            data: criteria
+        }).done(function(data){
+            window.open(location.host + "/reimaged-treeskin-connector/" + data);
+            // resolve();
+        }).fail(function(err){
+            resolve(err);
+        });
+    })
 }
 
 
@@ -275,4 +290,32 @@ var user_verifyLogin = function(username, pass){
 
 var user_getUser = function(username){
     return callAPI(url + "user/"+username)
+}
+
+var user_updateUser = function(user){
+    return new Promise(function(reject, resolve){
+        $.ajax({
+            method : 'PUT',
+            url : url+"user/",
+            data: user
+        }).done(function(data){
+            resolve(data);
+        }).fail(function(err){
+            resolve(err);
+        });
+    })
+}
+
+var user_updatePassword = function(user){
+    return new Promise(function(reject, resolve){
+        $.ajax({
+            method : 'PUT',
+            url : url+"user/password",
+            data: user
+        }).done(function(data){
+            resolve(data);
+        }).fail(function(err){
+            resolve(err);
+        });
+    })
 }

@@ -4,10 +4,12 @@ var DownloadHistory = (function ($, moment) {
 
     var gatherCriteria = function () {
         var criteria = {};
-        criteria.for = $("#forInput")[0].selectedOptions[0].value;
+        criteria.for = $("#forSubjects")[0].selectedOptions[0].value;
+        criteria.forName = $("#forSubjects")[0].selectedOptions[0].text;
         criteria.fromDate = $("#datepickerFrom").val()
         criteria.toDate = $("#datepickerTo").val()
-        criteria.provider = $("#provDDSearch")[0].selectedOptions[0].value;
+        criteria.provider = $("#forProviders")[0].selectedOptions[0].value;
+        criteria.providerName = $("#forProviders")[0].selectedOptions[0].text;
 
         return criteria;
     }
@@ -62,7 +64,7 @@ var DownloadHistory = (function ($, moment) {
                 var criteria = gatherCriteria();
                 var validation = validateCriteria(criteria);
                 if (validation.length < 1) {
-                    api_requestDownload(criteria);
+                    api_requestDownload(criteria)
                 } else {
                     $("#errors").show()
                     $("#errors").append("Errors in requesting hisory: \n")

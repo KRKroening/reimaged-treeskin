@@ -8,6 +8,7 @@
     "flatpickr": "^3.0.7",
     "gulp": "^3.9.1",
     "jquery": "^3.2.1",
+    "moment": "^2.23.0",
     "underscore": "^1.8.3"
   },
   "devDependencies": {

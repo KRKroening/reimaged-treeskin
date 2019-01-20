@@ -2,17 +2,13 @@ var AlertsList = (function () {
 
     var alertsList = {}
 
-    var active = "<i class='glyphicon glyphicon-asterisk' style='color:green;font-size:40px;'></i>"
-    var disabled = "<i class='glyphicon glyphicon-asterisk' style='color:orange;font-size:40px;'></i>"
+    var active = "<i class='glyphicon glyphicon-asterisk' style='color:green;font-size:20px;'></i>"
+    var disabled = "<i class='glyphicon glyphicon-asterisk' style='color:orange;font-size:20px;'></i>"
 
-    var unresolved = "<i class='glyphicon glyphicon-fire ' style='color:red;font-size:40px;'></i>"
-    var resolved = "<i class='glyphicon glyphicon-ok-sign' style='color:green;font-size:40px;'></i>"
-    
+    var unresolved = "<i class='glyphicon glyphicon-exclamation-sign' style='color:red;font-size:20px;'></i>"
+    var resolved = "<i class='glyphicon glyphicon-ok-sign' style='color:green;font-size:20px;'></i>"
 
     var subjects;
-
-    // var checkmark = "O"
-    // var crossout = "X"
 
     var filterTable = function (name) {
         var targetTable = $("#alertTableBody");
@@ -25,7 +21,7 @@ var AlertsList = (function () {
     }
 
     var displayFrequency = function (hours) {
-        switch (hours) {
+        switch (parseInt(hours)) {
             case 0:
                 return "No Repeat";
                 break;
@@ -92,7 +88,6 @@ var AlertsList = (function () {
 
     var markAsResolved = function (alert_id) {
         resolveAlert(alert_id);
-        console.log(alert_id)
     }
 
     var loadAlertsTable = function (data) {
@@ -102,12 +97,12 @@ var AlertsList = (function () {
                     return s
             })[0]
 
-            var html = `<tr class="${d.resolved ? "" : "ResolvedWarning\" title=\"Alarm has been triggered but not recorded as resolved."}"><td data-id=${d.id}>${d.name}</td>       
+            var html = `<tr class="${d.resolved ? "" : "ResolvedWarning"}\"><td data-id=${d.id}>${d.name}</td>       
                     <td>${sub.name}</td>
                     <td>${d.active ? active : disabled}</td>
                     <td>${displayFrequency(d.frequency)}</td>
                     <td>${d.trigger_date}</td>
-                    <td>${d.resolved ? resolved : unresolved}</td>
+                    <td ${d.resolved ? "":'title=\"Alarm has been triggered but not recorded as resolved."'}>${d.resolved ? resolved : unresolved}</td>
                     <td><label class='iconHover' onclick='window.location.href = "alerts_edit.html?mode=${d.id}";'>Edit</label> | <label class='iconHover' onclick='markAsResolved(${d.id})";'>Resolve</label>  | <label  class='iconHover' onclick="AlertsList.deleteAlert(${d.id})">Delete</label></td>
                     </tr>`;
             $("#alertTableBody").append(html);
@@ -145,4 +140,4 @@ var AlertsList = (function () {
         markAsResolved: markAsResolved
     }
 
-})(jQuery, moment);
+})();
